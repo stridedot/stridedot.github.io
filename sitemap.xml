@@ -2,6 +2,188 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
+      <loc>https://stridedot.github.io/2014/creating-a-new-theme/</loc>
+      
+      <lastmod>2014-09-28T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/2014/migrate-from-jekyll/</loc>
+      
+      <lastmod>2014-03-10T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/series/blog%E5%85%BB%E6%88%90%E8%AE%B0/</loc>
+      
+      <lastmod>2022-05-12T22:19:44+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/categories/</loc>
+      
+      <lastmod>2022-05-12T22:19:44+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/categories/golang/</loc>
+      
+      <lastmod>2022-05-12T22:19:44+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/tags/hugo/</loc>
+      
+      <lastmod>2022-05-12T22:19:44+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/2022/my-first-post/</loc>
+      
+      <lastmod>2022-05-12T22:19:44+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/posts/</loc>
+      
+      <lastmod>2022-05-12T22:19:44+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/series/</loc>
+      
+      <lastmod>2022-05-12T22:19:44+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/</loc>
+      
+      <lastmod>2022-05-12T22:19:44+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/tags/</loc>
+      
+      <lastmod>2022-05-12T22:19:44+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/categories/%E6%9D%82%E6%8A%80%E6%B5%85%E5%B0%9D/</loc>
+      
+      <lastmod>2022-05-12T22:19:44+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/series/hugo-101/</loc>
+      
+      <lastmod>2014-09-28T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
       <loc>https://stridedot.github.io/about/</loc>
       
       <lastmod>2014-04-09T00:00:00+00:00</lastmod>
@@ -16,7 +198,9 @@
     </url>
   
     <url>
-      <loc>https://stridedot.github.io/categories/</loc>
+      <loc>https://stridedot.github.io/2014/goisforlovers/</loc>
+      
+      <lastmod>2014-04-02T00:00:00+00:00</lastmod>
       
       
       <changefreq>monthly</changefreq>
@@ -28,7 +212,9 @@
     </url>
   
     <url>
-      <loc>https://stridedot.github.io/</loc>
+      <loc>https://stridedot.github.io/categories/development/</loc>
+      
+      <lastmod>2014-04-02T00:00:00+00:00</lastmod>
       
       
       <changefreq>monthly</changefreq>
@@ -40,7 +226,149 @@
     </url>
   
     <url>
-      <loc>https://stridedot.github.io/tags/</loc>
+      <loc>https://stridedot.github.io/tags/development/</loc>
+      
+      <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/2014/hugoisforlovers/</loc>
+      
+      <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/categories/go/</loc>
+      
+      <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/tags/go/</loc>
+      
+      <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/tags/golang/</loc>
+      
+      <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/2014/goisforlovers.fr/</loc>
+      
+      <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/tags/templates/</loc>
+      
+      <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/tags/themes/</loc>
+      
+      <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/projects/migrate-from-jekyll/</loc>
+      
+      <lastmod>2014-03-10T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/projects/</loc>
+      
+      <lastmod>2014-03-10T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://stridedot.github.io/categories/uncategorized/</loc>
+      
+      <lastmod>2014-03-10T00:00:00+00:00</lastmod>
       
       
       <changefreq>monthly</changefreq>
