@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>hugo on StrideDot</title><link>https://stridedot.github.io/tags/hugo/</link><description>Recent content in hugo on StrideDot</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>StrideDot</copyright><lastBuildDate>Wed, 09 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://stridedot.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>hugo 的安装与使用</title><link>https://stridedot.github.io/p/install-hugo/</link><pubDate>Wed, 09 Nov 2022 00:00:00 +0000</pubDate><guid>https://stridedot.github.io/p/install-hugo/</guid><description>&lt;p>Hugo 是个用于构建静态网站的快速、现代且灵活的开源静态站点生成器。
+它使用 Go 语言编写，以极快的速度生成静态网页，支持简单易懂的文件结构、主题和模板。
+Hugo 注重性能，使得用户能够在几秒内生成整个网站，它会将你使用 markdown 编写的内容转换成 HTML 文件。
+适用于用于个人博客和企业网站。&lt;/p>
+&lt;hr>
+&lt;h1 id="step-1-fork-hugo">Step 1: Fork hugo&lt;/h1>
+&lt;p>进入 &lt;a class="link" href="https://github.com/gohugoio/hugo" target="_blank" rel="noopener"
+>hugo&lt;/a> 页面，点击 &lt;code>fork&lt;/code>，&lt;code>hugo&lt;/code> 项目将同步到自己的 github 账户中。&lt;/p>
+&lt;hr>
+&lt;h1 id="step-2-git-clone">Step 2: Git Clone&lt;/h1>
+&lt;p>执行 &lt;code>git clone&lt;/code> 命令&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">$ git clone https://gitclone.com/github.com/stridedot/hugo.git --depth&lt;span class="o">=&lt;/span>&lt;span class="m">1&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>如果 clone 比较慢，可以在修改&lt;/p>
+&lt;p>&lt;code>https://github.com/stridedot/hugo.git --depth=1&lt;/code>&lt;/p>
+&lt;p>为&lt;/p>
+&lt;p>&lt;code>https://gitclone.com/github.com/stridedot/hugo.git --depth=1&lt;/code>&lt;/p>
+&lt;p>来加快下载速度&lt;/p>
+&lt;hr>
+&lt;h1 id="step-3-安装依赖">Step 3: 安装依赖&lt;/h1>
+&lt;p>进入 hugo 文件并 install&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">$ &lt;span class="nb">cd&lt;/span> hugo
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ go install
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;h1 id="step-4-编译">Step 4: 编译&lt;/h1>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">$ go build -o D:/software/Hugo/bin/hugo.exe main.go
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;h1 id="step-5-加入环境变量">Step 5: 加入环境变量&lt;/h1>
+&lt;p>点击&lt;strong>开始&lt;/strong>菜单，搜索“环境变量”即可看到&lt;/p>
+&lt;p>我们的 &lt;code>hugo&lt;/code> 可执行文件是 &lt;code>D:/software/Hugo/bin/hugo.exe&lt;/code> 。&lt;/p>
+&lt;hr>
+&lt;h1 id="step-6-测试-hugo">Step 6: 测试 hugo&lt;/h1>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">$ hugo version
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">hugo v0.121.0-DEV windows/amd64 &lt;span class="nv">BuildDate&lt;/span>&lt;span class="o">=&lt;/span>unknown
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>

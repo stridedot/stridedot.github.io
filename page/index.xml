@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on StrideDot</title><link>https://stridedot.github.io/page/</link><description>Recent content in Pages on StrideDot</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>StrideDot</copyright><lastBuildDate>Tue, 05 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://stridedot.github.io/page/index.xml" rel="self" type="application/rss+xml"/><item><title>归档</title><link>https://stridedot.github.io/archives/</link><pubDate>Tue, 05 Dec 2023 00:00:00 +0000</pubDate><guid>https://stridedot.github.io/archives/</guid><description/></item><item><title>关于</title><link>https://stridedot.github.io/%E5%85%B3%E4%BA%8E/</link><pubDate>Wed, 21 Sep 2022 17:50:46 +0800</pubDate><guid>https://stridedot.github.io/%E5%85%B3%E4%BA%8E/</guid><description>&lt;h1 id="自我介绍">自我介绍&lt;/h1>
+&lt;p>我叫赵志强（StrideDot），目前任职于 &lt;strong>数睿（深圳）科技有限公司&lt;/strong>。&lt;/p>
+&lt;p>在深圳工作了 8 年（截止到 2023），PHP 和 Go。&lt;/p>
+&lt;p>虽然做了这么久，但仍然觉得自己是个菜鸟，还有很多东西需要学习。&lt;/p>
+&lt;p>最近在做微服务项目，一直希冀在&lt;strong>区块链&lt;/strong>这方面有所建树。&lt;/p>
+&lt;hr>
+&lt;h1 id="开源项目">开源项目&lt;/h1>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://stridedot.github.io/" target="_blank" rel="noopener"
+>个人博客&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://github.com/hanpaopao66/kaspa_chinese_web_go" target="_blank" rel="noopener"
+>kaspa_web&lt;/a>：Kaspa区块链中文网站&lt;/li>
+&lt;li>&lt;a class="link" href="https://github.com/stridedot/go-standard-library-examples" target="_blank" rel="noopener"
+>go-standard-library&lt;/a>：个人Go标准库示例&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h1 id="工作技能">工作技能&lt;/h1>
+&lt;p>后端语言&lt;/p>
+&lt;ul>
+&lt;li>PHP&lt;/li>
+&lt;li>Go&lt;/li>
+&lt;li>Python&lt;/li>
+&lt;/ul>
+&lt;p>搜索引擎&lt;/p>
+&lt;ul>
+&lt;li>Elasticsearch&lt;/li>
+&lt;/ul>
+&lt;p>数据库&lt;/p>
+&lt;ul>
+&lt;li>MySQL&lt;/li>
+&lt;li>Clickhouse&lt;/li>
+&lt;li>Redis&lt;/li>
+&lt;/ul>
+&lt;p>微服务&lt;/p>
+&lt;ul>
+&lt;li>gRPC&lt;/li>
+&lt;li>Consul&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h1 id="仓库">仓库&lt;/h1>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://gitee.com/snitso" target="_blank" rel="noopener"
+>gitee&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://github.com/stridedot" target="_blank" rel="noopener"
+>github&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h1 id="项目经验">项目经验&lt;/h1>
+&lt;p>&lt;em>研发流程总结&lt;/em>&lt;/p>
+&lt;ol>
+&lt;li>提出问题
+&lt;ol>
+&lt;li>提前准备：仔细阅读需求文档。&lt;/li>
+&lt;li>具体而明确，关注具体的细节和需求。&lt;/li>
+&lt;li>针对关键点。&lt;/li>
+&lt;li>多角度思考。&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>与需求方充分沟通：了解他们的期望、需求和目标。
+&lt;ol>
+&lt;li>提出问题&lt;/li>
+&lt;li>倾听和记录&lt;/li>
+&lt;li>澄清和确认&lt;/li>
+&lt;li>持续沟通&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>使用用户故事
+&lt;ol>
+&lt;li>用户故事结构：用户的角色、目标和期望。&lt;/li>
+&lt;li>用户视角。&lt;/li>
+&lt;li>简洁明了，一句话描述用户需求。&lt;/li>
+&lt;li>可测试性。&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>使用原型和演示&lt;/li>
+&lt;li>分析和验证：分析文档，确保可衡量、可验证&lt;/li>
+&lt;li>持续沟通和反馈&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h1 id="格言">格言&lt;/h1>
+&lt;ul>
+&lt;li>There are only two things you need to be a great programmer: &lt;strong>curiosity&lt;/strong> and &lt;strong>kindness&lt;/strong>. Everything else you can learn over time. Everything.&lt;/li>
+&lt;li>健康、热情、努力、执着、心胸开阔&lt;/li>
+&lt;li>用心把每件小事做到最好&lt;/li>
+&lt;/ul></description></item><item><title>搜索</title><link>https://stridedot.github.io/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://stridedot.github.io/search/</guid><description/></item><item><title>友链</title><link>https://stridedot.github.io/%E5%8F%8B%E9%93%BE/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://stridedot.github.io/%E5%8F%8B%E9%93%BE/</guid><description>&lt;p>暂无&lt;/p></description></item></channel></rss>
