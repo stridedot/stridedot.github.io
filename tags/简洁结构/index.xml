@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>简洁结构 on StrideDot</title><link>https://stridedot.github.io/tags/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/</link><description>Recent content in 简洁结构 on StrideDot</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>StrideDot</copyright><lastBuildDate>Sun, 10 Dec 2023 11:02:05 +0800</lastBuildDate><atom:link href="https://stridedot.github.io/tags/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/index.xml" rel="self" type="application/rss+xml"/><item><title>简洁架构</title><link>https://stridedot.github.io/p/clean-architecture/</link><pubDate>Sun, 10 Dec 2023 11:02:05 +0800</pubDate><guid>https://stridedot.github.io/p/clean-architecture/</guid><description>&lt;img src="https://stridedot.github.io/p/clean-architecture/hexagonal-architecture.png" alt="Featured image of post 简洁架构" />&lt;hr>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>简洁结构 on StrideDot</title><link>https://stridedot.github.io/tags/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/</link><description>Recent content in 简洁结构 on StrideDot</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>StrideDot</copyright><lastBuildDate>Sun, 10 Dec 2023 11:02:05 +0800</lastBuildDate><atom:link href="https://stridedot.github.io/tags/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/index.xml" rel="self" type="application/rss+xml"/><item><title>简洁架构</title><link>https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/</link><pubDate>Sun, 10 Dec 2023 11:02:05 +0800</pubDate><guid>https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/</guid><description>&lt;img src="https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/hexagonal-architecture.png" alt="Featured image of post 简洁架构" />&lt;hr>
 &lt;h2 id="概要">概要&lt;/h2>
 &lt;p>封面图来自&lt;a class="link" href="https://reflectoring.io/book/" target="_blank" rel="noopener"
 >Get Your Hands Dirty on Clean Architecture&lt;/a>&lt;/p>
@@ -6,10 +6,10 @@
 >简洁架构&lt;/a>是一种软件设计原则，它的目标在于创造易于理解、可维护和可测试的软件系统。它的关注点在于&lt;em>职责分离&lt;/em>，同时也能够兼容系统的&lt;strong>可扩展性&lt;/strong>。&lt;/p>
 &lt;p>&lt;strong>简洁架构&lt;/strong>根据职责分了几个层次，&lt;a class="link" href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html" target="_blank" rel="noopener"
 >原文&lt;/a>给出了一个突出显示各层的图表：&lt;/p>
-&lt;p>&lt;img src="https://stridedot.github.io/p/clean-architecture/clean-architecture-1.jpg"
+&lt;p>&lt;img src="https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/clean-architecture-1.jpg"
 width="772"
 height="567"
-srcset="https://stridedot.github.io/p/clean-architecture/clean-architecture-1_hue43f250f8e4b132c31a6c67630a08fad_107444_480x0_resize_q75_box.jpg 480w, https://stridedot.github.io/p/clean-architecture/clean-architecture-1_hue43f250f8e4b132c31a6c67630a08fad_107444_1024x0_resize_q75_box.jpg 1024w"
+srcset="https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/clean-architecture-1_hue43f250f8e4b132c31a6c67630a08fad_107444_480x0_resize_q75_box.jpg 480w, https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/clean-architecture-1_hue43f250f8e4b132c31a6c67630a08fad_107444_1024x0_resize_q75_box.jpg 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
@@ -101,10 +101,10 @@ data-flex-basis="326px"
 &lt;li>检查是否在购物车中&lt;/li>
 &lt;/ul>
 &lt;p>简要的领域设计如下图&lt;/p>
-&lt;p>&lt;img src="https://stridedot.github.io/p/clean-architecture/domain-design-one.png"
+&lt;p>&lt;img src="https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/domain-design-one.png"
 width="594"
 height="535"
-srcset="https://stridedot.github.io/p/clean-architecture/domain-design-one_huafa1c3b55aa9d10869e4eb38040d99ec_12313_480x0_resize_box_3.png 480w, https://stridedot.github.io/p/clean-architecture/domain-design-one_huafa1c3b55aa9d10869e4eb38040d99ec_12313_1024x0_resize_box_3.png 1024w"
+srcset="https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/domain-design-one_huafa1c3b55aa9d10869e4eb38040d99ec_12313_480x0_resize_box_3.png 480w, https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/domain-design-one_huafa1c3b55aa9d10869e4eb38040d99ec_12313_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
@@ -130,10 +130,10 @@ data-flex-basis="266px"
 &lt;h3 id="设计适配器层">设计适配器层&lt;/h3>
 &lt;p>适配器的作用是使第三方服务和我们的系统兼容。&lt;/p>
 &lt;p>在服务端，适配器通常是数据库的连接、支付方式的调用、邮件的通知。&lt;/p>
-&lt;p>&lt;img src="https://stridedot.github.io/p/clean-architecture/clean-architecture-2.png"
+&lt;p>&lt;img src="https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/clean-architecture-2.png"
 width="856"
 height="529"
-srcset="https://stridedot.github.io/p/clean-architecture/clean-architecture-2_hu81b29747cd57a77fce845f706ec01045_20590_480x0_resize_box_3.png 480w, https://stridedot.github.io/p/clean-architecture/clean-architecture-2_hu81b29747cd57a77fce845f706ec01045_20590_1024x0_resize_box_3.png 1024w"
+srcset="https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/clean-architecture-2_hu81b29747cd57a77fce845f706ec01045_20590_480x0_resize_box_3.png 480w, https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/clean-architecture-2_hu81b29747cd57a77fce845f706ec01045_20590_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
@@ -526,10 +526,10 @@ data-flex-basis="388px"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h3 id="数据流程图">数据流程图&lt;/h3>
-&lt;p>&lt;img src="https://stridedot.github.io/p/clean-architecture/clean-architecture-flow.png"
+&lt;p>&lt;img src="https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/clean-architecture-flow.png"
 width="542"
 height="256"
-srcset="https://stridedot.github.io/p/clean-architecture/clean-architecture-flow_hu21f42683be6da23b0b6a003a97775d0d_11907_480x0_resize_box_3.png 480w, https://stridedot.github.io/p/clean-architecture/clean-architecture-flow_hu21f42683be6da23b0b6a003a97775d0d_11907_1024x0_resize_box_3.png 1024w"
+srcset="https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/clean-architecture-flow_hu21f42683be6da23b0b6a003a97775d0d_11907_480x0_resize_box_3.png 480w, https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/clean-architecture-flow_hu21f42683be6da23b0b6a003a97775d0d_11907_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
