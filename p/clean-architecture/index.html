@@ -1,0 +1,274 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="简洁架构是一种软件设计原则，它的目标在于创造易于理解、可维护和可测试的软件系统。它的关注点在于职责分离，同时也能够兼容系统的可扩展性。简洁架构根据职责分了几个层次：领域层、应用层、适配器层和基础架构层。"><meta name=keywords content="stridedot,StrideDot,简洁架构,clean architecture,架构设计"><title>简洁架构</title>
+<link rel=canonical href=https://stridedot.github.io/p/clean-architecture/><link rel=stylesheet href=/scss/style.min.3b7079a4a9579588477df96d0d7c5fba7a9cdf32498514a838084caaf2e6549e.css><meta property="og:title" content="简洁架构"><meta property="og:description" content="简洁架构是一种软件设计原则，它的目标在于创造易于理解、可维护和可测试的软件系统。它的关注点在于职责分离，同时也能够兼容系统的可扩展性。简洁架构根据职责分了几个层次：领域层、应用层、适配器层和基础架构层。"><meta property="og:url" content="https://stridedot.github.io/p/clean-architecture/"><meta property="og:site_name" content="StrideDot"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="简洁结构"><meta property="article:published_time" content="2023-12-10T11:02:05+08:00"><meta property="article:modified_time" content="2023-12-10T11:02:05+08:00"><meta property="og:image" content="https://stridedot.github.io/p/clean-architecture/hexagonal-architecture.png"><meta name=twitter:title content="简洁架构"><meta name=twitter:description content="简洁架构是一种软件设计原则，它的目标在于创造易于理解、可维护和可测试的软件系统。它的关注点在于职责分离，同时也能够兼容系统的可扩展性。简洁架构根据职责分了几个层次：领域层、应用层、适配器层和基础架构层。"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://stridedot.github.io/p/clean-architecture/hexagonal-architecture.png"><script async src="https://www.googletagmanager.com/gtag/js?id=G-BKHXFR6EJK"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-BKHXFR6EJK",{anonymize_ip:!1})}</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_huf232b10d15ab47404076b96a0786a28f_144957_300x0_resize_box_3.png width=300 height=301 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>⏰</span></figure><div class=site-meta><h1 class=site-name><a href=/>StrideDot</a></h1><h2 class=site-description>用心将每件小事做到最好.</h2></div></header><ol class=social-menu><li><a href=https://github.com/stridedot target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com/millionstoke target=_blank title=Twitter rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>主页</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg><span>关于</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>归档</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>搜索</span></a></li><li><a href=/%E5%8F%8B%E9%93%BE/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg><span>友链</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#概要>概要</a></li><li><a href=#简洁架构>简洁架构</a><ol><li><a href=#领域层domain-layer>领域层（Domain Layer）</a></li><li><a href=#应用层application-layer>应用层（Application Layer）</a></li><li><a href=#接口适配器层interface-adapters>接口适配器层（Interface Adapters）</a></li><li><a href=#基础架构infrastructure>基础架构（Infrastructure）</a></li><li><a href=#依赖规则>依赖规则</a></li></ol></li><li><a href=#简洁架构的优势>简洁架构的优势</a></li><li><a href=#mvc-类比>MVC 类比</a></li><li><a href=#应用设计>应用设计</a><ol><li><a href=#设计领域>设计领域</a></li><li><a href=#设计应用层>设计应用层</a></li><li><a href=#设计适配器层>设计适配器层</a></li><li><a href=#系统设计结构>系统设计结构</a></li><li><a href=#创建领域实体>创建领域实体</a></li><li><a href=#创建数据转换>创建数据转换</a></li><li><a href=#创建应用层>创建应用层</a></li><li><a href=#创建适配器>创建适配器</a></li><li><a href=#数据流程图>数据流程图</a></li></ol></li><li><a href=#总结>总结</a></li><li><a href=#参考>参考：</a><ol><li><a href=#设计实践httpslinkjuejincntargethttps3a2f2fdevto2fbespoyasov2fclean-architecture-on-frontend-431123design-in-practice><a href="https://link.juejin.cn?target=https%3A%2F%2Fdev.to%2Fbespoyasov%2Fclean-architecture-on-frontend-4311%23design-in-practice">设计实践</a></a></li><li><a href=#系统设计httpslinkjuejincntargethttps3a2f2fdevto2fbespoyasov2fclean-architecture-on-frontend-431123system-design><a href="https://link.juejin.cn?target=https%3A%2F%2Fdev.to%2Fbespoyasov%2Fclean-architecture-on-frontend-4311%23system-design">系统设计</a></a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/clean-architecture/><img src=/p/clean-architecture/hexagonal-architecture_hu19de147859b112cdb21cb6656b6db9ea_208481_800x0_resize_box_3.png srcset="/p/clean-architecture/hexagonal-architecture_hu19de147859b112cdb21cb6656b6db9ea_208481_800x0_resize_box_3.png 800w, /p/clean-architecture/hexagonal-architecture_hu19de147859b112cdb21cb6656b6db9ea_208481_1600x0_resize_box_3.png 1600w" width=800 height=424 loading=lazy alt="Featured image of post 简洁架构"></a></div><div class=article-details><header class=article-category><a href=/categories/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/>简洁结构</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/clean-architecture/>简洁架构</a></h2><h3 class=article-subtitle>简洁架构是一种软件设计原则，它的目标在于创造易于理解、可维护和可测试的软件系统。它的关注点在于职责分离，同时也能够兼容系统的可扩展性。简洁架构根据职责分了几个层次：领域层、应用层、适配器层和基础架构层。</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>2023-12-10</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 4 分钟</time></div></footer></div></header><section class=article-content><hr><h2 id=概要>概要</h2><p><a class=link href=https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html target=_blank rel=noopener>简洁架构</a>是一种软件设计原则，它的目标在于创造易于理解、可维护和可测试的软件系统。它的关注点在于<em>职责分离</em>，同时也能够兼容系统的<strong>可扩展性</strong>。</p><p><strong>简洁架构</strong>根据职责分了几个层次，<a class=link href=https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html target=_blank rel=noopener>原文</a>给出了一个突出显示各层的图表：</p><p><img src=/p/clean-architecture/clean-architecture-1.jpg width=772 height=567 srcset="/p/clean-architecture/clean-architecture-1_hue43f250f8e4b132c31a6c67630a08fad_107444_480x0_resize_q75_box.jpg 480w, /p/clean-architecture/clean-architecture-1_hue43f250f8e4b132c31a6c67630a08fad_107444_1024x0_resize_q75_box.jpg 1024w" loading=lazy alt=image class=gallery-image data-flex-grow=136 data-flex-basis=326px></p><p>下面的内容主要是围绕这几个层次展开。而且我们将以用户在商城购物的例子来实现一个用例，来进一步熟悉<strong>简洁架构</strong>。</p><hr><h2 id=简洁架构>简洁架构</h2><p><strong>简洁架构</strong>将系统划分为以下几个层次。</p><h3 id=领域层domain-layer>领域层（Domain Layer）</h3><p>虽然图中最内层给出的是<strong>实体层（Entities）</strong>，但我认为还应当包含数据转换的部分，所以这一层应当是<strong>领域层</strong>。</p><p><strong>领域层</strong>包含系统的核心业务实体和数据，以及用于转换数据的代码。</p><p><strong>实体层</strong>，你可以认为<strong>实体</strong>是我们在改变一些用例或应用时不会改变的东西。</p><p>在商城的案例中，这些实体是产品、订单、用户、购物车，以及增删改查其数据的功能。</p><p>将商品添加到购物车的函数并不关心该物品是如何添加的：或是用户自己点击”购买“添加，亦或是通过促销代码自动添加。这两种情况，你都会看到更新商品后的购物车。</p><h3 id=应用层application-layer>应用层（Application Layer）</h3><p><strong>应用层</strong>包含<strong>用例（Use Cases）</strong>，而用例是每一个业务场景的实现。<strong>用例</strong>用于和<strong>实体层</strong>交互。</p><p>例如，”添加到购物车”场景是一个用例。它描述了请求被发送到服务端后应当采取的操作。</p><p>对于 <code>MVC</code> 架构，<strong>应用层</strong>相当于<em>控制器层+业务逻辑层</em>。</p><h3 id=接口适配器层interface-adapters>接口适配器层（Interface Adapters）</h3><p><strong>适配器层</strong>是应用层和基础架构的桥梁，它负责将<strong>领域层</strong>的数据格式适配于外部界面的格式，同时也与<strong>基础架构</strong>进行交互。</p><p>例如，如果要处理一个请求并响应，就需要<strong>适配器</strong>处理成方便<strong>用例</strong>和<strong>实体</strong>理解的格式（比如 <code>json</code>），然后从<strong>实体</strong>和<strong>用例</strong>获取输出，再处理成请求源能够识别的形式。</p><h3 id=基础架构infrastructure>基础架构（Infrastructure）</h3><p>包含所有的 <code>I/O</code> 组件：UI、数据库、框架、设备等，是最易变化的层。</p><h3 id=依赖规则>依赖规则</h3><p><strong>简洁架构</strong>只有一个依赖规则：只有外层可以依赖内层。这意味着：</p><ul><li>领域必须是独立的</li><li>用例层依赖实体</li><li>外层可以依赖任何东西</li></ul><p>当然这个规则是可以违反的。我们经常看到在<strong>领域层</strong>依赖第三方库。</p><p>但不受控制的依赖关系会导致复杂和混乱的代码，如打破以来规则会导致：</p><ul><li>循环依赖，模块 A 依赖模块 B，B 依赖 C，C 依赖 A</li><li>测试性差，必须模拟整个系统来测试一小部分</li><li>耦合度太高</li></ul><hr><h2 id=简洁架构的优势>简洁架构的优势</h2><ul><li><p>领域分离</p><p>每个领域的功能是独立，与应用层的耦合度变低，更易维护和测试。</p></li><li><p>独立用例</p><p>应用场景即用例是单独描述的。在用例中可以决定使用哪些第三方服务，即使更换第三方服务，也不会影响到其他层。</p></li><li><p>可替换的三方服务</p><p>由于适配器的存在，更换第三方服务变的简单。只要实现了适配器的接口，即可调用这个服务。</p></li></ul><hr><h2 id=mvc-类比>MVC 类比</h2><p>通常，没有了解过 <a class=link href=https://domain-driven-design.org/zh/ddd-concept-reference.html target=_blank rel=noopener><code>DDD</code> 领域驱动</a> 的人都这些层次划分会很模糊，那么做一个 <code>MVC</code> 与<strong>简洁架构</strong>的类比会很有帮助：</p><ul><li>模型（Model）通常对应的是<strong>领域实体</strong></li><li>控制器（Controller），通常还会有有个业务逻辑层（Logic），对应的是<strong>应用层</strong>。</li><li>试图（View）通常对应的是<strong>适配器</strong></li></ul><p>虽然细节上有所不同，但大体类似。这种类比可以快速帮助理解分层的意义。</p><hr><h2 id=应用设计>应用设计</h2><p>我们的购物系统与各大商城类似。对于商城的设计，我们只关注主要部分：用户、商品、购物车和订单，而忽略次要部分：登录、校验和操作细节。</p><p>想象一下，如果我们要买一副羽毛球拍，需要经历以下步骤：</p><ul><li>用户加入购物车</li><li>提交结算</li><li>生成未支付订单</li><li>支付完成</li><li>更新为已支付订单</li><li>删除购物车</li></ul><h3 id=设计领域>设计领域</h3><p>程序中最重要的是领域，它包含了应用程序的主要实体和数据转换。</p><p>商城领域一般包含：</p><ul><li>实体数据：<code>user</code>, <code>cart</code>, <code>order</code>, <code>product</code></li><li>数据的转换函数</li></ul><p>转换函数只依赖于领域，比如：</p><ul><li>计算总成本的函数</li><li>检测产品库存</li><li>检查是否在购物车中</li></ul><p>简要的领域设计如下图</p><p><img src=/p/clean-architecture/domain-design-one.png width=594 height=535 srcset="/p/clean-architecture/domain-design-one_huafa1c3b55aa9d10869e4eb38040d99ec_12313_480x0_resize_box_3.png 480w, /p/clean-architecture/domain-design-one_huafa1c3b55aa9d10869e4eb38040d99ec_12313_1024x0_resize_box_3.png 1024w" loading=lazy alt=image class=gallery-image data-flex-grow=111 data-flex-basis=266px></p><h3 id=设计应用层>设计应用层</h3><p><strong>应用层</strong>包含用例。一个用例通常会有一个行为者（actor）或用户、一个动作（action）和一个响应。</p><p>在这个商城中，我们可以将应用层区分为以下一个几个用例：</p><ul><li>商品购买场景</li><li>调用第三方支付场景</li><li>查看订单场景</li></ul><p>用例通常以主题领域（subject area）的方式描述，其中商品购买场景有以下步骤：</p><ul><li>从购物车中检索商品并创建一个新的订单</li><li>订单付款</li><li>更新订单</li><li>通知用户</li><li>清除购物车</li></ul><h3 id=设计适配器层>设计适配器层</h3><p>适配器的作用是使第三方服务和我们的系统兼容。</p><p>在服务端，适配器通常是数据库的连接、支付方式的调用、邮件的通知。</p><p><img src=/p/clean-architecture/clean-architecture-2.png width=856 height=529 srcset="/p/clean-architecture/clean-architecture-2_hu81b29747cd57a77fce845f706ec01045_20590_480x0_resize_box_3.png 480w, /p/clean-architecture/clean-architecture-2_hu81b29747cd57a77fce845f706ec01045_20590_1024x0_resize_box_3.png 1024w" loading=lazy alt=image class=gallery-image data-flex-grow=161 data-flex-basis=388px></p><h3 id=系统设计结构>系统设计结构</h3><p><code>domain</code> 是领域层</p><p><code>application</code> 是应用层</p><p><code>services</code> 是适配器层</p><p>结构如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>architecture/
+</span></span><span class=line><span class=cl><span class=p>|</span>-domain/
+</span></span><span class=line><span class=cl>  <span class=p>|</span>-cart.go
+</span></span><span class=line><span class=cl>  <span class=p>|</span>-order.go
+</span></span><span class=line><span class=cl>  <span class=p>|</span>-user.go
+</span></span><span class=line><span class=cl>  <span class=p>|</span>-product.go
+</span></span><span class=line><span class=cl><span class=p>|</span>-application/
+</span></span><span class=line><span class=cl>  <span class=p>|</span>-cart.go
+</span></span><span class=line><span class=cl>  <span class=p>|</span>-interface.go
+</span></span><span class=line><span class=cl>  <span class=p>|</span>-order.go
+</span></span><span class=line><span class=cl>  <span class=p>|</span>-orderProduct.go
+</span></span><span class=line><span class=cl><span class=p>|</span>-services/
+</span></span><span class=line><span class=cl>  <span class=p>|</span>-notificationAdapter.go
+</span></span><span class=line><span class=cl>  <span class=p>|</span>-paymentAdapter.go
+</span></span></code></pre></td></tr></table></div></div><h3 id=创建领域实体>创建领域实体</h3><p>领域中有 4 个模块：</p><ul><li>用户</li><li>产品</li><li>购物车</li><li>订单</li></ul><p>用户是行为者，用户的实体包括：用户ID、姓名、邮箱等</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// domian/user.go
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>package</span> <span class=nx>domain</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>User</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>ID</span>       <span class=kt>int64</span>  <span class=s>`json:&#34;id&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Username</span> <span class=kt>string</span> <span class=s>`json:&#34;username&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Email</span>    <span class=kt>string</span> <span class=s>`json:&#34;email&#34;`</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>产品包括：产品ID、名称、价格等</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// domain/product.go
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>package</span> <span class=nx>domain</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Product</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>ID</span>    <span class=kt>int64</span>  <span class=s>`json:&#34;id&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Name</span>  <span class=kt>string</span> <span class=s>`json:&#34;name&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Price</span> <span class=kt>int64</span>  <span class=s>`json:&#34;price&#34;`</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>购物车包括：ID、用户ID、产品信息</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// domain/cart.go
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>package</span> <span class=nx>domain</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Cart</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>ID</span>       <span class=kt>int64</span>     <span class=s>`json:&#34;id&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=nx>UserID</span>   <span class=kt>int64</span>     <span class=s>`json:&#34;user_id&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Products</span> <span class=p>[]</span><span class=o>*</span><span class=nx>Product</span> <span class=s>`json:&#34;products&#34;`</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>订单包括：订单ID、用户ID、产品信息、状态</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// domain/order.go
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>package</span> <span class=nx>domain</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Order</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>ID</span>       <span class=kt>int64</span>     <span class=s>`json:&#34;id&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=nx>UserID</span>   <span class=kt>int64</span>     <span class=s>`json:&#34;user_id&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Products</span> <span class=p>[]</span><span class=o>*</span><span class=nx>Product</span> <span class=s>`json:&#34;products&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Status</span>   <span class=kt>int64</span>     <span class=s>`json:&#34;status&#34;`</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=创建数据转换>创建数据转换</h3><p><strong>注意</strong>：以下只是代码的简写，与业务无关。</p><p>购物车实体的 <code>Contains</code> 和 <code>AddProduct</code> 用于检查物品是否在购物车中和向购物车添加商品。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>c</span> <span class=o>*</span><span class=nx>Cart</span><span class=p>)</span> <span class=nf>Contains</span><span class=p>(</span><span class=nx>product</span> <span class=nx>Product</span><span class=p>)</span> <span class=p>(</span><span class=kt>bool</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>p</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>c</span><span class=p>.</span><span class=nx>Products</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nx>p</span><span class=p>.</span><span class=nx>ID</span> <span class=o>==</span> <span class=nx>product</span><span class=p>.</span><span class=nx>ID</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>return</span> <span class=kc>true</span><span class=p>,</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=kc>false</span><span class=p>,</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>GetCart</span><span class=p>(</span><span class=nx>userID</span> <span class=kt>int64</span><span class=p>)</span> <span class=p>(</span><span class=nx>Cart</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>Cart</span><span class=p>{},</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>c</span> <span class=o>*</span><span class=nx>Cart</span><span class=p>)</span> <span class=nf>AddProduct</span><span class=p>(</span><span class=nx>product</span> <span class=nx>Product</span><span class=p>)</span> <span class=p>(</span><span class=kt>bool</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>has</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>c</span><span class=p>.</span><span class=nf>Contains</span><span class=p>(</span><span class=nx>product</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>has</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>c</span><span class=p>.</span><span class=nx>Products</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>c</span><span class=p>.</span><span class=nx>Products</span><span class=p>,</span> <span class=nx>product</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// 有就更新
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=k>for</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>p</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>c</span><span class=p>.</span><span class=nx>Products</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>if</span> <span class=nx>p</span><span class=p>.</span><span class=nx>ID</span> <span class=o>==</span> <span class=nx>product</span><span class=p>.</span><span class=nx>ID</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nx>c</span><span class=p>.</span><span class=nx>Products</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span> <span class=p>=</span> <span class=nx>product</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=kc>true</span><span class=p>,</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>计算商品列表的总价格</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// domain/product.go
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>TotalPrice</span><span class=p>(</span><span class=nx>products</span> <span class=p>[]</span><span class=o>*</span><span class=nx>Product</span><span class=p>)</span> <span class=kt>int64</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>totalPrice</span> <span class=kt>int64</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>product</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>products</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>totalPrice</span> <span class=o>+=</span> <span class=nx>product</span><span class=p>.</span><span class=nx>Price</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>totalPrice</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>创建订单：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// domain/order.go
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>CreateOrder</span><span class=p>(</span><span class=nx>user</span> <span class=o>*</span><span class=nx>User</span><span class=p>,</span> <span class=nx>products</span> <span class=p>[]</span><span class=o>*</span><span class=nx>Product</span><span class=p>)</span> <span class=p>(</span><span class=nx>Order</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>order</span> <span class=nx>Order</span>
+</span></span><span class=line><span class=cl>	<span class=nx>order</span><span class=p>.</span><span class=nx>UserID</span> <span class=p>=</span> <span class=nx>user</span><span class=p>.</span><span class=nx>ID</span>
+</span></span><span class=line><span class=cl>	<span class=nx>order</span><span class=p>.</span><span class=nx>TotalPrice</span> <span class=p>=</span> <span class=nf>TotalPrice</span><span class=p>(</span><span class=nx>products</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>order</span><span class=p>.</span><span class=nx>Status</span> <span class=p>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>order</span><span class=p>,</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=创建应用层>创建应用层</h3><p>我们已经创建了领域层，接下来可以创建应用层了。</p><p>在订单方面，我们需要传递用户信息和产品信息，将两者绑定：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// application/orderProduct.go
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>package</span> <span class=nx>application</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;clean/domain&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>OrderProducts</span> <span class=kd>func</span><span class=p>(</span><span class=o>*</span><span class=nx>domain</span><span class=p>.</span><span class=nx>User</span><span class=p>,</span> <span class=p>[]</span><span class=o>*</span><span class=nx>domain</span><span class=p>.</span><span class=nx>Product</span><span class=p>)</span> <span class=p>(</span><span class=o>*</span><span class=nx>domain</span><span class=p>.</span><span class=nx>Order</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>正常情况下，不应当采用两个单独的参数，而应当将所有的参数封装在内部，这个情况在实际的业务开发中要注意。</p><p>购物车方面，在用户执行添加到购物车操作时，有以下步骤：</p><ul><li>获取购物车</li><li>检查购车是否已该商品</li><li>更新购物车</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// application/cart.go
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>AddToCart</span><span class=p>(</span><span class=nx>userID</span> <span class=kt>int64</span><span class=p>,</span> <span class=nx>productID</span> <span class=kt>int64</span><span class=p>)</span> <span class=p>(</span><span class=kt>bool</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>product</span> <span class=nx>domain</span><span class=p>.</span><span class=nx>Product</span>
+</span></span><span class=line><span class=cl>	<span class=nx>product</span><span class=p>.</span><span class=nx>ID</span> <span class=p>=</span> <span class=nx>productID</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>cart</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>domain</span><span class=p>.</span><span class=nf>GetCart</span><span class=p>(</span><span class=nx>userID</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>_</span><span class=p>,</span> <span class=nx>_</span> <span class=p>=</span> <span class=nx>cart</span><span class=p>.</span><span class=nf>AddProduct</span><span class=p>(</span><span class=nx>product</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=kc>true</span><span class=p>,</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>生成一个订单：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>CreateOrder</span><span class=p>(</span><span class=nx>user</span> <span class=o>*</span><span class=nx>domain</span><span class=p>.</span><span class=nx>User</span><span class=p>)</span> <span class=p>(</span><span class=o>*</span><span class=nx>domain</span><span class=p>.</span><span class=nx>Order</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>cart</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>domain</span><span class=p>.</span><span class=nf>GetCart</span><span class=p>(</span><span class=nx>user</span><span class=p>.</span><span class=nx>ID</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>order</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>domain</span><span class=p>.</span><span class=nf>CreateOrder</span><span class=p>(</span><span class=nx>user</span><span class=p>,</span> <span class=nx>cart</span><span class=p>.</span><span class=nx>Products</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=o>&amp;</span><span class=nx>order</span><span class=p>,</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>支付和发送通知接口：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// application/interface.go
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>import</span> <span class=s>&#34;clean/domain&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Pay</span><span class=p>(</span><span class=nx>order</span> <span class=o>*</span><span class=nx>domain</span><span class=p>.</span><span class=nx>Order</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>services</span><span class=p>.</span><span class=nf>Pay</span><span class=p>(</span><span class=nx>order</span><span class=p>.</span><span class=nx>TotalPrice</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Notify</span><span class=p>(</span><span class=nx>user</span> <span class=o>*</span><span class=nx>domain</span><span class=p>.</span><span class=nx>User</span><span class=p>,</span> <span class=nx>message</span> <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>services</span><span class=p>.</span><span class=nf>SendEmail</span><span class=p>(</span><span class=nx>user</span><span class=p>.</span><span class=nx>Email</span><span class=p>,</span> <span class=nx>message</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=创建适配器>创建适配器</h3><p>支付服务接口：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// services/paymentAdapter.go
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>Pay</span><span class=p>(</span><span class=nx>price</span> <span class=kt>int64</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// request Payment Server
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>通知服务接口：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// services/paymentAdapter.go
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>SendEmail</span><span class=p>(</span><span class=nx>email</span><span class=p>,</span> <span class=nx>message</span> <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// request Mail Server
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=数据流程图>数据流程图</h3><p><img src=/p/clean-architecture/clean-architecture-flow.png width=542 height=256 srcset="/p/clean-architecture/clean-architecture-flow_hu21f42683be6da23b0b6a003a97775d0d_11907_480x0_resize_box_3.png 480w, /p/clean-architecture/clean-architecture-flow_hu21f42683be6da23b0b6a003a97775d0d_11907_1024x0_resize_box_3.png 1024w" loading=lazy alt=image class=gallery-image data-flex-grow=211 data-flex-basis=508px></p><p>用户请求到应用层，应用层会自动调用外部服务。主要逻辑和数据都在领域层中。</p><p>所有的外部服务都隐藏在<strong>基础架构</strong>中，如果我们需要修改消息发送方式，只需要修改适配器即可。</p><hr><h2 id=总结>总结</h2><p>本文介绍了<strong>简洁架构</strong>的分层、与 <code>MVC</code> 开发模式的概念替换以及一个基本满足<strong>简洁架构</strong>的应用设计。</p><p>实际项目中的情况会更复杂，最主要的问题是我们对领域的了解不足。判断模块属于哪一层非常重要，关注点在于<strong>职责分离</strong>。</p><p>本文参考转文：<a class=link href=https://juejin.cn/post/7256607606465757243 target=_blank rel=noopener>【译】前端简洁架构</a></p><hr><h2 id=参考>参考：</h2><ul><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fyoutu.be%2FThgqBecaq_w" target=_blank rel=noopener>Public Talk about Clean Architecture on Frontend</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fbespoyasov.ru%2Ftalks%2Fpodlodka-conf-clean-architecture%2Fen.html" target=_blank rel=noopener>Slides for the Talk</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fbespoyasov%2Ffrontend-clean-architecture" target=_blank rel=noopener>The source code for the application we&rsquo;re going to design</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fbespoyasov.ru%2Fshowcase%2Ffrontend-clean-architecture%2Fen%2F" target=_blank rel=noopener>Sample of a working application</a></li></ul><h3 id=设计实践httpslinkjuejincntargethttps3a2f2fdevto2fbespoyasov2fclean-architecture-on-frontend-431123design-in-practice><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fdev.to%2Fbespoyasov%2Fclean-architecture-on-frontend-4311%23design-in-practice" target=_blank rel=noopener>设计实践</a></h3><ul><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fblog.cleancoder.com%2Funcle-bob%2F2012%2F08%2F13%2Fthe-clean-architecture.html" target=_blank rel=noopener>The Clean Architecture</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FModel%E2%80%93view%E2%80%93controller" target=_blank rel=noopener>Model-View-Controller</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fherbertograca.com%2F2017%2F11%2F16%2Fexplicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together%2F%23domain-layer" target=_blank rel=noopener>DDD, Hexagonal, Onion, Clean, CQRS, … How I put it all together</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fherbertograca.com%2F2017%2F09%2F14%2Fports-adapters-architecture%2F" target=_blank rel=noopener>Ports & Adapters Architecture</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fherbertograca.com%2F2018%2F07%2F07%2Fmore-than-concentric-layers%2F" target=_blank rel=noopener>More than Concentric Layers</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fdev.to%2Fbespoyasov%2Fseries%2F12558" target=_blank rel=noopener>Generating Trees Using L-Systems, TypeScript, and OOP Series&rsquo; Articles</a></li></ul><h3 id=系统设计httpslinkjuejincntargethttps3a2f2fdevto2fbespoyasov2fclean-architecture-on-frontend-431123system-design><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fdev.to%2Fbespoyasov%2Fclean-architecture-on-frontend-4311%23system-design" target=_blank rel=noopener>系统设计</a></h3><ul><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FDomain_knowledge" target=_blank rel=noopener>Domain Knowledge</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FUse_case" target=_blank rel=noopener>Use Case</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FCoupling_%28computer_programming%29" target=_blank rel=noopener>Coupling</a> and <a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FCohesion_%28computer_science%29" target=_blank rel=noopener>cohesion</a></li><li><a class=link href="https://link.juejin.cn?target=http%3A%2F%2Fddd.fed.wiki.org%2Fview%2Fwelcome-visitors%2Fview%2Fdomain-driven-design%2Fview%2Fshared-kernel" target=_blank rel=noopener>Shared Kernel</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAnalysis_paralysis" target=_blank rel=noopener>Analysis Paralysis</a></li></ul></section><footer class=article-footer><section class=article-tags><a href=/tags/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/>简洁结构</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><script src=https://giscus.app/client.js data-repo=stridedot/stridedot.github.io data-repo-id=R_kgDOHUrReg data-category=Announcements data-category-id=DIC_kwDOHUrRes4CbivC data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2023 StrideDot</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.21.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
