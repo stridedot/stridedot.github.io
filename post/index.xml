@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on StrideDot</title><link>https://stridedot.github.io/post/</link><description>Recent content in Posts on StrideDot</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>StrideDot</copyright><lastBuildDate>Sun, 10 Dec 2023 11:02:05 +0800</lastBuildDate><atom:link href="https://stridedot.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>简洁架构</title><link>https://stridedot.github.io/p/clean-architecture/</link><pubDate>Sun, 10 Dec 2023 11:02:05 +0800</pubDate><guid>https://stridedot.github.io/p/clean-architecture/</guid><description>&lt;img src="https://stridedot.github.io/p/clean-architecture/hexagonal-architecture.png" alt="Featured image of post 简洁架构" />&lt;hr>
 &lt;h2 id="概要">概要&lt;/h2>
+&lt;p>封面图来自&lt;a class="link" href="https://reflectoring.io/book/" target="_blank" rel="noopener"
+>Get Your Hands Dirty on Clean Architecture&lt;/a>&lt;/p>
 &lt;p>&lt;a class="link" href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html" target="_blank" rel="noopener"
 >简洁架构&lt;/a>是一种软件设计原则，它的目标在于创造易于理解、可维护和可测试的软件系统。它的关注点在于&lt;em>职责分离&lt;/em>，同时也能够兼容系统的&lt;strong>可扩展性&lt;/strong>。&lt;/p>
 &lt;p>&lt;strong>简洁架构&lt;/strong>根据职责分了几个层次，&lt;a class="link" href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html" target="_blank" rel="noopener"
