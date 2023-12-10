@@ -4,7 +4,7 @@ keywords: ['stridedot', 'StrideDot', '简洁架构', 'clean architecture', '架�
 description: 简洁架构是一种软件设计原则，它的目标在于创造易于理解、可维护和可测试的软件系统。它的关注点在于职责分离，同时也能够兼容系统的可扩展性。简洁架构根据职责分了几个层次：领域层、应用层、适配器层和基础架构层。
 date: 2023-12-10T11:02:05+08:00
 author: "StrideDot"
-slug: clean-architecture
+slug: 简洁结构
 image: hexagonal-architecture.png
 math: 
 license: 
@@ -12,7 +12,7 @@ hidden: false
 comments: true
 draft: false
 tags: ["简洁结构"]
-categories: ["简洁结构"]
+categories: ["clean architecture"]
 ---
 
 ---
