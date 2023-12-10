@@ -1,6 +1,6 @@
 baseurl: https://stridedot.github.io
 languageCode: zh-cn
-theme: hugo-theme-stack
+theme: hugo-them-stack
 paginate: 5
 title: StrideDot
 copyright: StrideDot
@@ -11,7 +11,7 @@ languages:
         title: StrideDot
         weight: 1
         params:
-            description: 这里写博客的描述
+            description: 欢迎来到我的个人博客！这里是一个编程者的技术殿堂，一个记录我在代码世界中探索和成长的地方。作为一名热衷于技术的程序员，我将与你分享我在编程旅途中的见闻、心得和独到观点
 #    en:
 #        languageName: English
 #        title: Example Site
@@ -27,7 +27,7 @@ languages:
 #            description: وصف تجريبي
 
 # Change it to your Disqus shortname before using
-disqusShortname: hugo-theme-stack
+disqusShortname: hugo-them-stack
 
 # GA Tracking ID
 googleAnalytics: G-BKHXFR6EJK
