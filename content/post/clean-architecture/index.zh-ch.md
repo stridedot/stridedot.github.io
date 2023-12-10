@@ -4,7 +4,7 @@ keywords: ['stridedot', 'StrideDot', '简洁架构', 'clean architecture', '架�
 description: 简洁架构是一种软件设计原则，它的目标在于创造易于理解、可维护和可测试的软件系统。它的关注点在于职责分离，同时也能够兼容系统的可扩展性。简洁架构根据职责分了几个层次：领域层、应用层、适配器层和基础架构层。
 date: 2023-12-10T11:02:05+08:00
 author: "StrideDot"
-slug: 简洁结构
+slug: clean-architecture
 image: hexagonal-architecture.png
 math: 
 license: 
@@ -56,11 +56,9 @@ categories: ["clean architecture"]
 
 ### 应用层（Application Layer）
 
-**应用层**包含**用例（Use Cases）**，而用例是每一个业务场景的实现。**用例**用于和**实体层**交互。
+**应用层**包含**用例（Use Cases）**，而用例是每一个业务场景的实现。**用例**用于和**领域层**交互。
 
 例如，”添加到购物车”场景是一个用例。它描述了请求被发送到服务端后应当采取的操作。
-
-对于 `MVC` 架构，**应用层**相当于*控制器层+业务逻辑层*。
 
 
 
@@ -127,8 +125,8 @@ categories: ["clean architecture"]
 通常，没有了解过 [`DDD` 领域驱动](https://domain-driven-design.org/zh/ddd-concept-reference.html) 的人都这些层次划分会很模糊，那么做一个 `MVC` 与**简洁架构**的类比会很有帮助：
 
 - 模型（Model）通常对应的是**领域实体**
-- 控制器（Controller），通常还会有有个业务逻辑层（Logic），对应的是**应用层**。
-- 试图（View）通常对应的是**适配器**
+- 控制器（Controller）通常对应的是**应用层**。
+- 视图（View）通常对应的是**适配器**
 
 虽然细节上有所不同，但大体类似。这种类比可以快速帮助理解分层的意义。
 
