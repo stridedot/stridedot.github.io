@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>StrideDot</title><link>https://stridedot.github.io/</link><description>Recent content on StrideDot</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>StrideDot</copyright><lastBuildDate>Sun, 10 Dec 2023 11:02:05 +0800</lastBuildDate><atom:link href="https://stridedot.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>简洁架构</title><link>https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/</link><pubDate>Sun, 10 Dec 2023 11:02:05 +0800</pubDate><guid>https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/</guid><description>&lt;img src="https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/hexagonal-architecture.png" alt="Featured image of post 简洁架构" />&lt;hr>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>StrideDot</title><link>https://stridedot.github.io/</link><description>Recent content on StrideDot</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>StrideDot</copyright><lastBuildDate>Sun, 10 Dec 2023 11:02:05 +0800</lastBuildDate><atom:link href="https://stridedot.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>简洁架构</title><link>https://stridedot.github.io/p/clean-architecture/</link><pubDate>Sun, 10 Dec 2023 11:02:05 +0800</pubDate><guid>https://stridedot.github.io/p/clean-architecture/</guid><description>&lt;img src="https://stridedot.github.io/p/clean-architecture/hexagonal-architecture.png" alt="Featured image of post 简洁架构" />&lt;hr>
 &lt;h2 id="概要">概要&lt;/h2>
 &lt;p>封面图来自&lt;a class="link" href="https://reflectoring.io/book/" target="_blank" rel="noopener"
 >Get Your Hands Dirty on Clean Architecture&lt;/a>&lt;/p>
@@ -6,10 +6,10 @@
 >简洁架构&lt;/a>是一种软件设计原则，它的目标在于创造易于理解、可维护和可测试的软件系统。它的关注点在于&lt;em>职责分离&lt;/em>，同时也能够兼容系统的&lt;strong>可扩展性&lt;/strong>。&lt;/p>
 &lt;p>&lt;strong>简洁架构&lt;/strong>根据职责分了几个层次，&lt;a class="link" href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html" target="_blank" rel="noopener"
 >原文&lt;/a>给出了一个突出显示各层的图表：&lt;/p>
-&lt;p>&lt;img src="https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/clean-architecture-1.jpg"
+&lt;p>&lt;img src="https://stridedot.github.io/p/clean-architecture/clean-architecture-1.jpg"
 width="772"
 height="567"
-srcset="https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/clean-architecture-1_hue43f250f8e4b132c31a6c67630a08fad_107444_480x0_resize_q75_box.jpg 480w, https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/clean-architecture-1_hue43f250f8e4b132c31a6c67630a08fad_107444_1024x0_resize_q75_box.jpg 1024w"
+srcset="https://stridedot.github.io/p/clean-architecture/clean-architecture-1_hue43f250f8e4b132c31a6c67630a08fad_107444_480x0_resize_q75_box.jpg 480w, https://stridedot.github.io/p/clean-architecture/clean-architecture-1_hue43f250f8e4b132c31a6c67630a08fad_107444_1024x0_resize_q75_box.jpg 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
@@ -27,9 +27,8 @@ data-flex-basis="326px"
 &lt;p>在商城的案例中，这些实体是产品、订单、用户、购物车，以及增删改查其数据的功能。&lt;/p>
 &lt;p>将商品添加到购物车的函数并不关心该物品是如何添加的：或是用户自己点击”购买“添加，亦或是通过促销代码自动添加。这两种情况，你都会看到更新商品后的购物车。&lt;/p>
 &lt;h3 id="应用层application-layer">应用层（Application Layer）&lt;/h3>
-&lt;p>&lt;strong>应用层&lt;/strong>包含&lt;strong>用例（Use Cases）&lt;/strong>，而用例是每一个业务场景的实现。&lt;strong>用例&lt;/strong>用于和&lt;strong>实体层&lt;/strong>交互。&lt;/p>
+&lt;p>&lt;strong>应用层&lt;/strong>包含&lt;strong>用例（Use Cases）&lt;/strong>，而用例是每一个业务场景的实现。&lt;strong>用例&lt;/strong>用于和&lt;strong>领域层&lt;/strong>交互。&lt;/p>
 &lt;p>例如，”添加到购物车”场景是一个用例。它描述了请求被发送到服务端后应当采取的操作。&lt;/p>
-&lt;p>对于 &lt;code>MVC&lt;/code> 架构，&lt;strong>应用层&lt;/strong>相当于&lt;em>控制器层+业务逻辑层&lt;/em>。&lt;/p>
 &lt;h3 id="接口适配器层interface-adapters">接口适配器层（Interface Adapters）&lt;/h3>
 &lt;p>&lt;strong>适配器层&lt;/strong>是应用层和基础架构的桥梁，它负责将&lt;strong>领域层&lt;/strong>的数据格式适配于外部界面的格式，同时也与&lt;strong>基础架构&lt;/strong>进行交互。&lt;/p>
 &lt;p>例如，如果要处理一个请求并响应，就需要&lt;strong>适配器&lt;/strong>处理成方便&lt;strong>用例&lt;/strong>和&lt;strong>实体&lt;/strong>理解的格式（比如 &lt;code>json&lt;/code>），然后从&lt;strong>实体&lt;/strong>和&lt;strong>用例&lt;/strong>获取输出，再处理成请求源能够识别的形式。&lt;/p>
@@ -71,8 +70,8 @@ data-flex-basis="326px"
 >&lt;code>DDD&lt;/code> 领域驱动&lt;/a> 的人都这些层次划分会很模糊，那么做一个 &lt;code>MVC&lt;/code> 与&lt;strong>简洁架构&lt;/strong>的类比会很有帮助：&lt;/p>
 &lt;ul>
 &lt;li>模型（Model）通常对应的是&lt;strong>领域实体&lt;/strong>&lt;/li>
-&lt;li>控制器（Controller），通常还会有有个业务逻辑层（Logic），对应的是&lt;strong>应用层&lt;/strong>。&lt;/li>
-&lt;li>试图（View）通常对应的是&lt;strong>适配器&lt;/strong>&lt;/li>
+&lt;li>控制器（Controller）通常对应的是&lt;strong>应用层&lt;/strong>。&lt;/li>
+&lt;li>视图（View）通常对应的是&lt;strong>适配器&lt;/strong>&lt;/li>
 &lt;/ul>
 &lt;p>虽然细节上有所不同，但大体类似。这种类比可以快速帮助理解分层的意义。&lt;/p>
 &lt;hr>
@@ -101,10 +100,10 @@ data-flex-basis="326px"
 &lt;li>检查是否在购物车中&lt;/li>
 &lt;/ul>
 &lt;p>简要的领域设计如下图&lt;/p>
-&lt;p>&lt;img src="https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/domain-design-one.png"
+&lt;p>&lt;img src="https://stridedot.github.io/p/clean-architecture/domain-design-one.png"
 width="594"
 height="535"
-srcset="https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/domain-design-one_huafa1c3b55aa9d10869e4eb38040d99ec_12313_480x0_resize_box_3.png 480w, https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/domain-design-one_huafa1c3b55aa9d10869e4eb38040d99ec_12313_1024x0_resize_box_3.png 1024w"
+srcset="https://stridedot.github.io/p/clean-architecture/domain-design-one_huafa1c3b55aa9d10869e4eb38040d99ec_12313_480x0_resize_box_3.png 480w, https://stridedot.github.io/p/clean-architecture/domain-design-one_huafa1c3b55aa9d10869e4eb38040d99ec_12313_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
@@ -130,10 +129,10 @@ data-flex-basis="266px"
 &lt;h3 id="设计适配器层">设计适配器层&lt;/h3>
 &lt;p>适配器的作用是使第三方服务和我们的系统兼容。&lt;/p>
 &lt;p>在服务端，适配器通常是数据库的连接、支付方式的调用、邮件的通知。&lt;/p>
-&lt;p>&lt;img src="https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/clean-architecture-2.png"
+&lt;p>&lt;img src="https://stridedot.github.io/p/clean-architecture/clean-architecture-2.png"
 width="856"
 height="529"
-srcset="https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/clean-architecture-2_hu81b29747cd57a77fce845f706ec01045_20590_480x0_resize_box_3.png 480w, https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/clean-architecture-2_hu81b29747cd57a77fce845f706ec01045_20590_1024x0_resize_box_3.png 1024w"
+srcset="https://stridedot.github.io/p/clean-architecture/clean-architecture-2_hu81b29747cd57a77fce845f706ec01045_20590_480x0_resize_box_3.png 480w, https://stridedot.github.io/p/clean-architecture/clean-architecture-2_hu81b29747cd57a77fce845f706ec01045_20590_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
@@ -526,10 +525,10 @@ data-flex-basis="388px"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h3 id="数据流程图">数据流程图&lt;/h3>
-&lt;p>&lt;img src="https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/clean-architecture-flow.png"
+&lt;p>&lt;img src="https://stridedot.github.io/p/clean-architecture/clean-architecture-flow.png"
 width="542"
 height="256"
-srcset="https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/clean-architecture-flow_hu21f42683be6da23b0b6a003a97775d0d_11907_480x0_resize_box_3.png 480w, https://stridedot.github.io/p/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/clean-architecture-flow_hu21f42683be6da23b0b6a003a97775d0d_11907_1024x0_resize_box_3.png 1024w"
+srcset="https://stridedot.github.io/p/clean-architecture/clean-architecture-flow_hu21f42683be6da23b0b6a003a97775d0d_11907_480x0_resize_box_3.png 480w, https://stridedot.github.io/p/clean-architecture/clean-architecture-flow_hu21f42683be6da23b0b6a003a97775d0d_11907_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
