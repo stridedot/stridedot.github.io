@@ -18,6 +18,7 @@ categories: ["简洁结构"]
 ---
 
 ## 概要
+封面图来自[Get Your Hands Dirty on Clean Architecture](https://reflectoring.io/book/)
 
 [简洁架构](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)是一种软件设计原则，它的目标在于创造易于理解、可维护和可测试的软件系统。它的关注点在于*职责分离*，同时也能够兼容系统的**可扩展性**。
 
