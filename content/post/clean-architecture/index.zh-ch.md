@@ -247,9 +247,9 @@ architecture/
 package domain
 
 type User struct {
-	ID       int64  `json:"id"`
-	Username string `json:"username"`
-	Email    string `json:"email"`
+    ID       int64  `json:"id"`
+    Username string `json:"username"`
+    Email    string `json:"email"`
 }
 ```
 
@@ -262,9 +262,9 @@ type User struct {
 package domain
 
 type Product struct {
-	ID    int64  `json:"id"`
-	Name  string `json:"name"`
-	Price int64  `json:"price"`
+    ID    int64  `json:"id"`
+    Name  string `json:"name"`
+    Price int64  `json:"price"`
 }
 ```
 
@@ -277,9 +277,9 @@ type Product struct {
 package domain
 
 type Cart struct {
-	ID       int64     `json:"id"`
-	UserID   int64     `json:"user_id"`
-	Products []*Product `json:"products"`
+    ID       int64     `json:"id"`
+    UserID   int64     `json:"user_id"`
+    Products []*Product `json:"products"`
 }
 ```
 
@@ -292,10 +292,10 @@ type Cart struct {
 package domain
 
 type Order struct {
-	ID       int64     `json:"id"`
-	UserID   int64     `json:"user_id"`
-	Products []*Product `json:"products"`
-	Status   int64     `json:"status"`
+    ID       int64     `json:"id"`
+    UserID   int64     `json:"user_id"`
+    Products []*Product `json:"products"`
+    Status   int64     `json:"status"`
 }
 ```
 
@@ -311,31 +311,31 @@ type Order struct {
 
 ```go
 func (c *Cart) Contains(product Product) (bool, error) {
-	for _, p := range c.Products {
-		if p.ID == product.ID {
-			return true, nil
-		}
-	}
-	return false, nil
+    for _, p := range c.Products {
+        if p.ID == product.ID {
+            return true, nil
+        }
+    }
+    return false, nil
 }
 
 func GetCart(userID int64) (Cart, error) {
-	return Cart{}, nil
+    return Cart{}, nil
 }
 
 func (c *Cart) AddProduct(product Product) (bool, error) {
-	has, _ := c.Contains(product)
-	if has {
-		c.Products = append(c.Products, product)
-	} else {
-		// 有就更新
-		for i, p := range c.Products {
-			if p.ID == product.ID {
-				c.Products[i] = product
-			}
-		}
-	}
-	return true, nil
+    has, _ := c.Contains(product)
+    if has {
+        c.Products = append(c.Products, product)
+    } else {
+        // 有就更新
+        for i, p := range c.Products {
+            if p.ID == product.ID {
+                c.Products[i] = product
+            }
+        }
+    }
+    return true, nil
 }
 ```
 
@@ -346,11 +346,11 @@ func (c *Cart) AddProduct(product Product) (bool, error) {
 ```go
 // domain/product.go
 func TotalPrice(products []*Product) int64 {
-	var totalPrice int64
-	for _, product := range products {
-		totalPrice += product.Price
-	}
-	return totalPrice
+    var totalPrice int64
+    for _, product := range products {
+        totalPrice += product.Price
+    }
+    return totalPrice
 }
 ```
 
@@ -361,11 +361,11 @@ func TotalPrice(products []*Product) int64 {
 ```go
 // domain/order.go
 func CreateOrder(user *User, products []*Product) (Order, error) {
-	var order Order
-	order.UserID = user.ID
-	order.TotalPrice = TotalPrice(products)
-	order.Status = 0
-	return order, nil
+    var order Order
+    order.UserID = user.ID
+    order.TotalPrice = TotalPrice(products)
+    order.Status = 0
+    return order, nil
 }
 ```
 
@@ -382,7 +382,7 @@ func CreateOrder(user *User, products []*Product) (Order, error) {
 package application
 
 import (
-	"clean/domain"
+    "clean/domain"
 )
 
 type OrderProducts func(*domain.User, []*domain.Product) (*domain.Order, error)
@@ -401,13 +401,13 @@ type OrderProducts func(*domain.User, []*domain.Product) (*domain.Order, error)
 ```go
 // application/cart.go
 func AddToCart(userID int64, productID int64) (bool, error) {
-	var product domain.Product
-	product.ID = productID
-
-	cart, _ := domain.GetCart(userID)
-	_, _ = cart.AddProduct(product)
-
-	return true, nil
+    var product domain.Product
+    product.ID = productID
+  
+    cart, _ := domain.GetCart(userID)
+    _, _ = cart.AddProduct(product)
+  
+    return true, nil
 }
 ```
 
@@ -417,10 +417,10 @@ func AddToCart(userID int64, productID int64) (bool, error) {
 
 ```go
 func CreateOrder(user *domain.User) (*domain.Order, error) {
-	cart, _ := domain.GetCart(user.ID)
-	order, _ := domain.CreateOrder(user, cart.Products)
-
-	return &order, nil
+    cart, _ := domain.GetCart(user.ID)
+    order, _ := domain.CreateOrder(user, cart.Products)
+  
+    return &order, nil
 }
 ```
 
@@ -433,11 +433,11 @@ func CreateOrder(user *domain.User) (*domain.Order, error) {
 import "clean/domain"
 
 func Pay(order *domain.Order) {
-	services.Pay(order.TotalPrice)
+    services.Pay(order.TotalPrice)
 }
 
 func Notify(user *domain.User, message string) {
-	services.SendEmail(user.Email, message)
+    services.SendEmail(user.Email, message)
 }
 ```
 
@@ -450,7 +450,7 @@ func Notify(user *domain.User, message string) {
 ```go
 // services/paymentAdapter.go
 func Pay(price int64) {
-	// request Payment Server
+    // request Payment Server
 }
 ```
 
@@ -461,7 +461,7 @@ func Pay(price int64) {
 ```go
 // services/paymentAdapter.go
 func SendEmail(email, message string) {
-	// request Mail Server
+    // request Mail Server
 }
 ```
 
