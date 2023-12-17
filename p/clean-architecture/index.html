@@ -41,9 +41,9 @@
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>package</span> <span class=nx>domain</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>User</span> <span class=kd>struct</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=nx>ID</span>       <span class=kt>int64</span>  <span class=s>`json:&#34;id&#34;`</span>
-</span></span><span class=line><span class=cl>	<span class=nx>Username</span> <span class=kt>string</span> <span class=s>`json:&#34;username&#34;`</span>
-</span></span><span class=line><span class=cl>	<span class=nx>Email</span>    <span class=kt>string</span> <span class=s>`json:&#34;email&#34;`</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ID</span>       <span class=kt>int64</span>  <span class=s>`json:&#34;id&#34;`</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Username</span> <span class=kt>string</span> <span class=s>`json:&#34;username&#34;`</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Email</span>    <span class=kt>string</span> <span class=s>`json:&#34;email&#34;`</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>产品包括：产品ID、名称、价格等</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -57,9 +57,9 @@
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>package</span> <span class=nx>domain</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Product</span> <span class=kd>struct</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=nx>ID</span>    <span class=kt>int64</span>  <span class=s>`json:&#34;id&#34;`</span>
-</span></span><span class=line><span class=cl>	<span class=nx>Name</span>  <span class=kt>string</span> <span class=s>`json:&#34;name&#34;`</span>
-</span></span><span class=line><span class=cl>	<span class=nx>Price</span> <span class=kt>int64</span>  <span class=s>`json:&#34;price&#34;`</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ID</span>    <span class=kt>int64</span>  <span class=s>`json:&#34;id&#34;`</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Name</span>  <span class=kt>string</span> <span class=s>`json:&#34;name&#34;`</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Price</span> <span class=kt>int64</span>  <span class=s>`json:&#34;price&#34;`</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>购物车包括：ID、用户ID、产品信息</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -73,9 +73,9 @@
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>package</span> <span class=nx>domain</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Cart</span> <span class=kd>struct</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=nx>ID</span>       <span class=kt>int64</span>     <span class=s>`json:&#34;id&#34;`</span>
-</span></span><span class=line><span class=cl>	<span class=nx>UserID</span>   <span class=kt>int64</span>     <span class=s>`json:&#34;user_id&#34;`</span>
-</span></span><span class=line><span class=cl>	<span class=nx>Products</span> <span class=p>[]</span><span class=o>*</span><span class=nx>Product</span> <span class=s>`json:&#34;products&#34;`</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ID</span>       <span class=kt>int64</span>     <span class=s>`json:&#34;id&#34;`</span>
+</span></span><span class=line><span class=cl>    <span class=nx>UserID</span>   <span class=kt>int64</span>     <span class=s>`json:&#34;user_id&#34;`</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Products</span> <span class=p>[]</span><span class=o>*</span><span class=nx>Product</span> <span class=s>`json:&#34;products&#34;`</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>订单包括：订单ID、用户ID、产品信息、状态</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -90,10 +90,10 @@
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>package</span> <span class=nx>domain</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Order</span> <span class=kd>struct</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=nx>ID</span>       <span class=kt>int64</span>     <span class=s>`json:&#34;id&#34;`</span>
-</span></span><span class=line><span class=cl>	<span class=nx>UserID</span>   <span class=kt>int64</span>     <span class=s>`json:&#34;user_id&#34;`</span>
-</span></span><span class=line><span class=cl>	<span class=nx>Products</span> <span class=p>[]</span><span class=o>*</span><span class=nx>Product</span> <span class=s>`json:&#34;products&#34;`</span>
-</span></span><span class=line><span class=cl>	<span class=nx>Status</span>   <span class=kt>int64</span>     <span class=s>`json:&#34;status&#34;`</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ID</span>       <span class=kt>int64</span>     <span class=s>`json:&#34;id&#34;`</span>
+</span></span><span class=line><span class=cl>    <span class=nx>UserID</span>   <span class=kt>int64</span>     <span class=s>`json:&#34;user_id&#34;`</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Products</span> <span class=p>[]</span><span class=o>*</span><span class=nx>Product</span> <span class=s>`json:&#34;products&#34;`</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Status</span>   <span class=kt>int64</span>     <span class=s>`json:&#34;status&#34;`</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><h3 id=创建数据转换>创建数据转换</h3><p><strong>注意</strong>：以下只是代码的简写，与业务无关。</p><p>购物车实体的 <code>Contains</code> 和 <code>AddProduct</code> 用于检查物品是否在购物车中和向购物车添加商品。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -123,31 +123,31 @@
 </span><span class=lnt>26
 </span><span class=lnt>27
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>c</span> <span class=o>*</span><span class=nx>Cart</span><span class=p>)</span> <span class=nf>Contains</span><span class=p>(</span><span class=nx>product</span> <span class=nx>Product</span><span class=p>)</span> <span class=p>(</span><span class=kt>bool</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>p</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>c</span><span class=p>.</span><span class=nx>Products</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nx>p</span><span class=p>.</span><span class=nx>ID</span> <span class=o>==</span> <span class=nx>product</span><span class=p>.</span><span class=nx>ID</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>			<span class=k>return</span> <span class=kc>true</span><span class=p>,</span> <span class=kc>nil</span>
-</span></span><span class=line><span class=cl>		<span class=p>}</span>
-</span></span><span class=line><span class=cl>	<span class=p>}</span>
-</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=kc>false</span><span class=p>,</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>p</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>c</span><span class=p>.</span><span class=nx>Products</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=nx>p</span><span class=p>.</span><span class=nx>ID</span> <span class=o>==</span> <span class=nx>product</span><span class=p>.</span><span class=nx>ID</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=kc>true</span><span class=p>,</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=kc>false</span><span class=p>,</span> <span class=kc>nil</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>GetCart</span><span class=p>(</span><span class=nx>userID</span> <span class=kt>int64</span><span class=p>)</span> <span class=p>(</span><span class=nx>Cart</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>Cart</span><span class=p>{},</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>Cart</span><span class=p>{},</span> <span class=kc>nil</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>c</span> <span class=o>*</span><span class=nx>Cart</span><span class=p>)</span> <span class=nf>AddProduct</span><span class=p>(</span><span class=nx>product</span> <span class=nx>Product</span><span class=p>)</span> <span class=p>(</span><span class=kt>bool</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=nx>has</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>c</span><span class=p>.</span><span class=nf>Contains</span><span class=p>(</span><span class=nx>product</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>has</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>		<span class=nx>c</span><span class=p>.</span><span class=nx>Products</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>c</span><span class=p>.</span><span class=nx>Products</span><span class=p>,</span> <span class=nx>product</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>	<span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>		<span class=c1>// 有就更新
-</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=k>for</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>p</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>c</span><span class=p>.</span><span class=nx>Products</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>			<span class=k>if</span> <span class=nx>p</span><span class=p>.</span><span class=nx>ID</span> <span class=o>==</span> <span class=nx>product</span><span class=p>.</span><span class=nx>ID</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>				<span class=nx>c</span><span class=p>.</span><span class=nx>Products</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span> <span class=p>=</span> <span class=nx>product</span>
-</span></span><span class=line><span class=cl>			<span class=p>}</span>
-</span></span><span class=line><span class=cl>		<span class=p>}</span>
-</span></span><span class=line><span class=cl>	<span class=p>}</span>
-</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=kc>true</span><span class=p>,</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl>    <span class=nx>has</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>c</span><span class=p>.</span><span class=nf>Contains</span><span class=p>(</span><span class=nx>product</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>has</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>c</span><span class=p>.</span><span class=nx>Products</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>c</span><span class=p>.</span><span class=nx>Products</span><span class=p>,</span> <span class=nx>product</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 有就更新
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>for</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>p</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>c</span><span class=p>.</span><span class=nx>Products</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=nx>p</span><span class=p>.</span><span class=nx>ID</span> <span class=o>==</span> <span class=nx>product</span><span class=p>.</span><span class=nx>ID</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=nx>c</span><span class=p>.</span><span class=nx>Products</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span> <span class=p>=</span> <span class=nx>product</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=kc>true</span><span class=p>,</span> <span class=kc>nil</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>计算商品列表的总价格</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -159,11 +159,11 @@
 </span><span class=lnt>8
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// domain/product.go
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>TotalPrice</span><span class=p>(</span><span class=nx>products</span> <span class=p>[]</span><span class=o>*</span><span class=nx>Product</span><span class=p>)</span> <span class=kt>int64</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>totalPrice</span> <span class=kt>int64</span>
-</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>product</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>products</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>		<span class=nx>totalPrice</span> <span class=o>+=</span> <span class=nx>product</span><span class=p>.</span><span class=nx>Price</span>
-</span></span><span class=line><span class=cl>	<span class=p>}</span>
-</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>totalPrice</span>
+</span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=nx>totalPrice</span> <span class=kt>int64</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>product</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>products</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>totalPrice</span> <span class=o>+=</span> <span class=nx>product</span><span class=p>.</span><span class=nx>Price</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>totalPrice</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>创建订单：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -175,11 +175,11 @@
 </span><span class=lnt>8
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// domain/order.go
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>CreateOrder</span><span class=p>(</span><span class=nx>user</span> <span class=o>*</span><span class=nx>User</span><span class=p>,</span> <span class=nx>products</span> <span class=p>[]</span><span class=o>*</span><span class=nx>Product</span><span class=p>)</span> <span class=p>(</span><span class=nx>Order</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>order</span> <span class=nx>Order</span>
-</span></span><span class=line><span class=cl>	<span class=nx>order</span><span class=p>.</span><span class=nx>UserID</span> <span class=p>=</span> <span class=nx>user</span><span class=p>.</span><span class=nx>ID</span>
-</span></span><span class=line><span class=cl>	<span class=nx>order</span><span class=p>.</span><span class=nx>TotalPrice</span> <span class=p>=</span> <span class=nf>TotalPrice</span><span class=p>(</span><span class=nx>products</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>	<span class=nx>order</span><span class=p>.</span><span class=nx>Status</span> <span class=p>=</span> <span class=mi>0</span>
-</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>order</span><span class=p>,</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=nx>order</span> <span class=nx>Order</span>
+</span></span><span class=line><span class=cl>    <span class=nx>order</span><span class=p>.</span><span class=nx>UserID</span> <span class=p>=</span> <span class=nx>user</span><span class=p>.</span><span class=nx>ID</span>
+</span></span><span class=line><span class=cl>    <span class=nx>order</span><span class=p>.</span><span class=nx>TotalPrice</span> <span class=p>=</span> <span class=nf>TotalPrice</span><span class=p>(</span><span class=nx>products</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>order</span><span class=p>.</span><span class=nx>Status</span> <span class=p>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>order</span><span class=p>,</span> <span class=kc>nil</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><h3 id=创建应用层>创建应用层</h3><p>我们已经创建了领域层，接下来可以创建应用层了。</p><p>在订单方面，我们需要传递用户信息和产品信息，将两者绑定：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -193,7 +193,7 @@
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>package</span> <span class=nx>application</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
-</span></span><span class=line><span class=cl>	<span class=s>&#34;clean/domain&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;clean/domain&#34;</span>
 </span></span><span class=line><span class=cl><span class=p>)</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>OrderProducts</span> <span class=kd>func</span><span class=p>(</span><span class=o>*</span><span class=nx>domain</span><span class=p>.</span><span class=nx>User</span><span class=p>,</span> <span class=p>[]</span><span class=o>*</span><span class=nx>domain</span><span class=p>.</span><span class=nx>Product</span><span class=p>)</span> <span class=p>(</span><span class=o>*</span><span class=nx>domain</span><span class=p>.</span><span class=nx>Order</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span>
@@ -209,13 +209,13 @@
 </span><span class=lnt>10
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// application/cart.go
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>AddToCart</span><span class=p>(</span><span class=nx>userID</span> <span class=kt>int64</span><span class=p>,</span> <span class=nx>productID</span> <span class=kt>int64</span><span class=p>)</span> <span class=p>(</span><span class=kt>bool</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>product</span> <span class=nx>domain</span><span class=p>.</span><span class=nx>Product</span>
-</span></span><span class=line><span class=cl>	<span class=nx>product</span><span class=p>.</span><span class=nx>ID</span> <span class=p>=</span> <span class=nx>productID</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=nx>cart</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>domain</span><span class=p>.</span><span class=nf>GetCart</span><span class=p>(</span><span class=nx>userID</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>	<span class=nx>_</span><span class=p>,</span> <span class=nx>_</span> <span class=p>=</span> <span class=nx>cart</span><span class=p>.</span><span class=nf>AddProduct</span><span class=p>(</span><span class=nx>product</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=kc>true</span><span class=p>,</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=nx>product</span> <span class=nx>domain</span><span class=p>.</span><span class=nx>Product</span>
+</span></span><span class=line><span class=cl>    <span class=nx>product</span><span class=p>.</span><span class=nx>ID</span> <span class=p>=</span> <span class=nx>productID</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=nx>cart</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>domain</span><span class=p>.</span><span class=nf>GetCart</span><span class=p>(</span><span class=nx>userID</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>_</span><span class=p>,</span> <span class=nx>_</span> <span class=p>=</span> <span class=nx>cart</span><span class=p>.</span><span class=nf>AddProduct</span><span class=p>(</span><span class=nx>product</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=kc>true</span><span class=p>,</span> <span class=kc>nil</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>生成一个订单：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -224,10 +224,10 @@
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>CreateOrder</span><span class=p>(</span><span class=nx>user</span> <span class=o>*</span><span class=nx>domain</span><span class=p>.</span><span class=nx>User</span><span class=p>)</span> <span class=p>(</span><span class=o>*</span><span class=nx>domain</span><span class=p>.</span><span class=nx>Order</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=nx>cart</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>domain</span><span class=p>.</span><span class=nf>GetCart</span><span class=p>(</span><span class=nx>user</span><span class=p>.</span><span class=nx>ID</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>	<span class=nx>order</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>domain</span><span class=p>.</span><span class=nf>CreateOrder</span><span class=p>(</span><span class=nx>user</span><span class=p>,</span> <span class=nx>cart</span><span class=p>.</span><span class=nx>Products</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=o>&amp;</span><span class=nx>order</span><span class=p>,</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl>    <span class=nx>cart</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>domain</span><span class=p>.</span><span class=nf>GetCart</span><span class=p>(</span><span class=nx>user</span><span class=p>.</span><span class=nx>ID</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>order</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>domain</span><span class=p>.</span><span class=nf>CreateOrder</span><span class=p>(</span><span class=nx>user</span><span class=p>,</span> <span class=nx>cart</span><span class=p>.</span><span class=nx>Products</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=o>&amp;</span><span class=nx>order</span><span class=p>,</span> <span class=kc>nil</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>支付和发送通知接口：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -243,11 +243,11 @@
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>import</span> <span class=s>&#34;clean/domain&#34;</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Pay</span><span class=p>(</span><span class=nx>order</span> <span class=o>*</span><span class=nx>domain</span><span class=p>.</span><span class=nx>Order</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=nx>services</span><span class=p>.</span><span class=nf>Pay</span><span class=p>(</span><span class=nx>order</span><span class=p>.</span><span class=nx>TotalPrice</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>services</span><span class=p>.</span><span class=nf>Pay</span><span class=p>(</span><span class=nx>order</span><span class=p>.</span><span class=nx>TotalPrice</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Notify</span><span class=p>(</span><span class=nx>user</span> <span class=o>*</span><span class=nx>domain</span><span class=p>.</span><span class=nx>User</span><span class=p>,</span> <span class=nx>message</span> <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=nx>services</span><span class=p>.</span><span class=nf>SendEmail</span><span class=p>(</span><span class=nx>user</span><span class=p>.</span><span class=nx>Email</span><span class=p>,</span> <span class=nx>message</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>services</span><span class=p>.</span><span class=nf>SendEmail</span><span class=p>(</span><span class=nx>user</span><span class=p>.</span><span class=nx>Email</span><span class=p>,</span> <span class=nx>message</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><h3 id=创建适配器>创建适配器</h3><p>支付服务接口：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -255,7 +255,7 @@
 </span><span class=lnt>4
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// services/paymentAdapter.go
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>Pay</span><span class=p>(</span><span class=nx>price</span> <span class=kt>int64</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=c1>// request Payment Server
+</span></span><span class=line><span class=cl>    <span class=c1>// request Payment Server
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>通知服务接口：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -263,7 +263,7 @@
 </span><span class=lnt>4
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// services/paymentAdapter.go
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>SendEmail</span><span class=p>(</span><span class=nx>email</span><span class=p>,</span> <span class=nx>message</span> <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=c1>// request Mail Server
+</span></span><span class=line><span class=cl>    <span class=c1>// request Mail Server
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><h3 id=数据流程图>数据流程图</h3><p><img src=/p/clean-architecture/clean-architecture-flow.png width=542 height=256 srcset="/p/clean-architecture/clean-architecture-flow_hu21f42683be6da23b0b6a003a97775d0d_11907_480x0_resize_box_3.png 480w, /p/clean-architecture/clean-architecture-flow_hu21f42683be6da23b0b6a003a97775d0d_11907_1024x0_resize_box_3.png 1024w" loading=lazy alt=image class=gallery-image data-flex-grow=211 data-flex-basis=508px></p><p>用户请求到应用层，应用层会自动调用外部服务。主要逻辑和数据都在领域层中。</p><p>所有的外部服务都隐藏在<strong>基础架构</strong>中，如果我们需要修改消息发送方式，只需要修改适配器即可。</p><hr><h2 id=总结>总结</h2><p>本文介绍了<strong>简洁架构</strong>的分层、与 <code>MVC</code> 开发模式的概念替换以及一个基本满足<strong>简洁架构</strong>的应用设计。</p><p>实际项目中的情况会更复杂，最主要的问题是我们对领域的了解不足。判断模块属于哪一层非常重要，关注点在于<strong>职责分离</strong>。</p><p>本文参考转文：<a class=link href=https://juejin.cn/post/7256607606465757243 target=_blank rel=noopener>【译】前端简洁架构</a></p><hr><h2 id=参考>参考：</h2><ul><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fyoutu.be%2FThgqBecaq_w" target=_blank rel=noopener>Public Talk about Clean Architecture on Frontend</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fbespoyasov.ru%2Ftalks%2Fpodlodka-conf-clean-architecture%2Fen.html" target=_blank rel=noopener>Slides for the Talk</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fbespoyasov%2Ffrontend-clean-architecture" target=_blank rel=noopener>The source code for the application we&rsquo;re going to design</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fbespoyasov.ru%2Fshowcase%2Ffrontend-clean-architecture%2Fen%2F" target=_blank rel=noopener>Sample of a working application</a></li></ul><h3 id=设计实践httpslinkjuejincntargethttps3a2f2fdevto2fbespoyasov2fclean-architecture-on-frontend-431123design-in-practice><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fdev.to%2Fbespoyasov%2Fclean-architecture-on-frontend-4311%23design-in-practice" target=_blank rel=noopener>设计实践</a></h3><ul><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fblog.cleancoder.com%2Funcle-bob%2F2012%2F08%2F13%2Fthe-clean-architecture.html" target=_blank rel=noopener>The Clean Architecture</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FModel%E2%80%93view%E2%80%93controller" target=_blank rel=noopener>Model-View-Controller</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fherbertograca.com%2F2017%2F11%2F16%2Fexplicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together%2F%23domain-layer" target=_blank rel=noopener>DDD, Hexagonal, Onion, Clean, CQRS, … How I put it all together</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fherbertograca.com%2F2017%2F09%2F14%2Fports-adapters-architecture%2F" target=_blank rel=noopener>Ports & Adapters Architecture</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fherbertograca.com%2F2018%2F07%2F07%2Fmore-than-concentric-layers%2F" target=_blank rel=noopener>More than Concentric Layers</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fdev.to%2Fbespoyasov%2Fseries%2F12558" target=_blank rel=noopener>Generating Trees Using L-Systems, TypeScript, and OOP Series&rsquo; Articles</a></li></ul><h3 id=系统设计httpslinkjuejincntargethttps3a2f2fdevto2fbespoyasov2fclean-architecture-on-frontend-431123system-design><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fdev.to%2Fbespoyasov%2Fclean-architecture-on-frontend-4311%23system-design" target=_blank rel=noopener>系统设计</a></h3><ul><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FDomain_knowledge" target=_blank rel=noopener>Domain Knowledge</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FUse_case" target=_blank rel=noopener>Use Case</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FCoupling_%28computer_programming%29" target=_blank rel=noopener>Coupling</a> and <a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FCohesion_%28computer_science%29" target=_blank rel=noopener>cohesion</a></li><li><a class=link href="https://link.juejin.cn?target=http%3A%2F%2Fddd.fed.wiki.org%2Fview%2Fwelcome-visitors%2Fview%2Fdomain-driven-design%2Fview%2Fshared-kernel" target=_blank rel=noopener>Shared Kernel</a></li><li><a class=link href="https://link.juejin.cn?target=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAnalysis_paralysis" target=_blank rel=noopener>Analysis Paralysis</a></li></ul></section><footer class=article-footer><section class=article-tags><a href=/tags/%E7%AE%80%E6%B4%81%E7%BB%93%E6%9E%84/>简洁结构</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><script src=https://giscus.app/client.js data-repo=stridedot/stridedot.github.io data-repo-id=R_kgDOHUrReg data-category=Announcements data-category-id=DIC_kwDOHUrRes4CbivC data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
 2023 StrideDot</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.21.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
