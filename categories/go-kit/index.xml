@@ -34,9 +34,10 @@ data-flex-basis="457px"
 >&lt;/p>
 &lt;p>端点：是 &lt;code>Service&lt;/code> 层的入口，对 &lt;code>Service&lt;/code> 进行 wrapper。它是定义输入和输出定义用例的地方，用简洁架构术语来说，就是处理请求-&amp;gt;调用 &lt;code>Service&lt;/code>-&amp;gt;返回响应。&lt;/p>
 &lt;blockquote>
-&lt;p>&lt;em>请注意，端点是一个接收请求并返回响应的函数，它们都是 interface{}，即 &lt;code>RequestModel&lt;/code> 和 &lt;code>ResponseModel&lt;/code>。理论上它也可以用类型参数（泛型）来实现。&lt;/em>&lt;/p>
+&lt;p>&lt;em>请注意，端点是一个接收请求并返回响应的函数，它们都是 interface{}，即 &lt;code>RequestModel&lt;/code> 和 &lt;code>ResponseModel&lt;/code>。理论上它也可以用类型参数（泛型）来实现。&lt;/em>
+&lt;a class="link" href="..%2F..%2F..%2F.git%2Fconfig" >config&lt;/a>
+中间件：通过一组中间件来组合和包装端点，实现例如日志记录、认证、限流等功能&lt;/p>
 &lt;/blockquote>
-&lt;p>中间件：通过一组中间件来组合和包装端点，实现例如日志记录、认证、限流等功能&lt;/p>
 &lt;p>&lt;strong>Service&lt;/strong>&lt;/p>
 &lt;p>&lt;img src="https://stridedot.github.io/p/go-kit-http/go-kit-service.png"
 width="596"
