@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='WebSocket 提供了全双工通道形式，允许服务器和客户端之间进行双向通信。这意味着不但客户端可以向服务端发送消息，同时服务端也可以向服务器发送消息。
+WebSocket 通常用于
+实时聊天工具 实时游戏 实时协作工具 &amp;hellip;&amp;hellip; 但对于很多 web 程序来说，WebSocket 可能过大。比如，客户端需要实时更新会员中心页的通知数量，不需要双向通信。这时，只需要由服务端向客户端发送消息即可，这个技术就是：SSE。
+什么是 SSE SSE(Server-Sent Events)使用的是基于 HTTP 的协议。严格来讲，HTTP 协议是无法做到服务器主动推送消息的。但凡事都有例外，就是服务器向客户端声明发送的是数据流。
+1 Content-Type:text/event-stream 也就是说，服务端发送的并不是一次性的数据包，而是不间断的数据流。只要有数据，服务端会源源不断的向客户端发送数据，直到客户端关闭连接。
+这种通信是以流的形式来通信，视频播放即是这种形式。
+SSE 利用这种机制向浏览器推送消息。目前除了IE浏览器，基本上所有的浏览器都支持。
+与 WebSocket 的区别 SSE 提供单向通信，WebSocket 提供双向通信 SSE 基于 HTTP 协议，WebSocket 基于单独的协议（WebSocket 协议） SSE 只能传输文本，WebSocket 支持二进制和文本传输 SSE 不支持通信加密，WebSocket 支持加密通信（TLS/SSL） SSE 有最大连接数限制，WebSocket 协议本身吴最大连接数的限制 SSE 支持重连，WebSocket 需要自己实现 SSE 的特点 通过单个 HTTP 长连接推送消息，无需轮询 使用轻量级的文本格式（JSON）,减少不必要的资源消耗 浏览器普遍支持 实现简单 数据格式 请求头 服务端向浏览器发送的 SSE 数据，必须是 UTF-8 编码的文本，必须包含以下 HTTP 请求头：
+1 2 3 Content-Type: text/event-stream Cache-Control: no-cache Connection: keep-alive 消息体 SSE 的消息体格式如下：'>
+<title>Go SSE</title>
+
+<link rel='canonical' href='https://stridedot.github.io/p/go-sse/'>
+
+<link rel="stylesheet" href="/scss/style.min.afb944d5f50daabc35ef3c9b727a03ad1f993f8198d054f0cc409b3f300fe854.css"><meta property='og:title' content='Go SSE'>
+<meta property='og:description' content='WebSocket 提供了全双工通道形式，允许服务器和客户端之间进行双向通信。这意味着不但客户端可以向服务端发送消息，同时服务端也可以向服务器发送消息。
+WebSocket 通常用于
+实时聊天工具 实时游戏 实时协作工具 &amp;hellip;&amp;hellip; 但对于很多 web 程序来说，WebSocket 可能过大。比如，客户端需要实时更新会员中心页的通知数量，不需要双向通信。这时，只需要由服务端向客户端发送消息即可，这个技术就是：SSE。
+什么是 SSE SSE(Server-Sent Events)使用的是基于 HTTP 的协议。严格来讲，HTTP 协议是无法做到服务器主动推送消息的。但凡事都有例外，就是服务器向客户端声明发送的是数据流。
+1 Content-Type:text/event-stream 也就是说，服务端发送的并不是一次性的数据包，而是不间断的数据流。只要有数据，服务端会源源不断的向客户端发送数据，直到客户端关闭连接。
+这种通信是以流的形式来通信，视频播放即是这种形式。
+SSE 利用这种机制向浏览器推送消息。目前除了IE浏览器，基本上所有的浏览器都支持。
+与 WebSocket 的区别 SSE 提供单向通信，WebSocket 提供双向通信 SSE 基于 HTTP 协议，WebSocket 基于单独的协议（WebSocket 协议） SSE 只能传输文本，WebSocket 支持二进制和文本传输 SSE 不支持通信加密，WebSocket 支持加密通信（TLS/SSL） SSE 有最大连接数限制，WebSocket 协议本身吴最大连接数的限制 SSE 支持重连，WebSocket 需要自己实现 SSE 的特点 通过单个 HTTP 长连接推送消息，无需轮询 使用轻量级的文本格式（JSON）,减少不必要的资源消耗 浏览器普遍支持 实现简单 数据格式 请求头 服务端向浏览器发送的 SSE 数据，必须是 UTF-8 编码的文本，必须包含以下 HTTP 请求头：
+1 2 3 Content-Type: text/event-stream Cache-Control: no-cache Connection: keep-alive 消息体 SSE 的消息体格式如下：'>
+<meta property='og:url' content='https://stridedot.github.io/p/go-sse/'>
+<meta property='og:site_name' content='StrideDot'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SSE' /><meta property='article:tag' content='server-sent-events' /><meta property='article:published_time' content='2024-01-24T20:32:07&#43;08:00'/><meta property='article:modified_time' content='2024-01-24T20:32:07&#43;08:00'/><meta property='og:image' content='https://stridedot.github.io/p/go-sse/sse.png' />
+<meta name="twitter:title" content="Go SSE">
+<meta name="twitter:description" content="WebSocket 提供了全双工通道形式，允许服务器和客户端之间进行双向通信。这意味着不但客户端可以向服务端发送消息，同时服务端也可以向服务器发送消息。
+WebSocket 通常用于
+实时聊天工具 实时游戏 实时协作工具 &amp;hellip;&amp;hellip; 但对于很多 web 程序来说，WebSocket 可能过大。比如，客户端需要实时更新会员中心页的通知数量，不需要双向通信。这时，只需要由服务端向客户端发送消息即可，这个技术就是：SSE。
+什么是 SSE SSE(Server-Sent Events)使用的是基于 HTTP 的协议。严格来讲，HTTP 协议是无法做到服务器主动推送消息的。但凡事都有例外，就是服务器向客户端声明发送的是数据流。
+1 Content-Type:text/event-stream 也就是说，服务端发送的并不是一次性的数据包，而是不间断的数据流。只要有数据，服务端会源源不断的向客户端发送数据，直到客户端关闭连接。
+这种通信是以流的形式来通信，视频播放即是这种形式。
+SSE 利用这种机制向浏览器推送消息。目前除了IE浏览器，基本上所有的浏览器都支持。
+与 WebSocket 的区别 SSE 提供单向通信，WebSocket 提供双向通信 SSE 基于 HTTP 协议，WebSocket 基于单独的协议（WebSocket 协议） SSE 只能传输文本，WebSocket 支持二进制和文本传输 SSE 不支持通信加密，WebSocket 支持加密通信（TLS/SSL） SSE 有最大连接数限制，WebSocket 协议本身吴最大连接数的限制 SSE 支持重连，WebSocket 需要自己实现 SSE 的特点 通过单个 HTTP 长连接推送消息，无需轮询 使用轻量级的文本格式（JSON）,减少不必要的资源消耗 浏览器普遍支持 实现简单 数据格式 请求头 服务端向浏览器发送的 SSE 数据，必须是 UTF-8 编码的文本，必须包含以下 HTTP 请求头：
+1 2 3 Content-Type: text/event-stream Cache-Control: no-cache Connection: keep-alive 消息体 SSE 的消息体格式如下："><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://stridedot.github.io/p/go-sse/sse.png' />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKHXFR6EJK"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-BKHXFR6EJK', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huf232b10d15ab47404076b96a0786a28f_144957_300x0_resize_box_3.png" width="300"
+                            height="301" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">⏰</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">StrideDot</a></h1>
+            <h2 class="site-description">用心将每件小事做到最好.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/stridedot'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/millionstoke'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#什么是-sse">什么是 SSE</a></li>
+    <li><a href="#与-websocket-的区别">与 WebSocket 的区别</a></li>
+    <li><a href="#sse-的特点">SSE 的特点</a></li>
+    <li><a href="#数据格式">数据格式</a>
+      <ol>
+        <li><a href="#请求头">请求头</a></li>
+        <li><a href="#消息体">消息体</a></li>
+      </ol>
+    </li>
+    <li><a href="#sse-实战">SSE 实战</a>
+      <ol>
+        <li><a href="#具体流程">具体流程</a></li>
+        <li><a href="#服务端实现">服务端实现</a></li>
+        <li><a href="#js-实现">js 实现</a></li>
+        <li><a href="#sse-测试">SSE 测试</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/go-sse/">
+                <img src="/p/go-sse/sse_hub20de7200eadae8c2851bb2c08fb8e41_89131_800x0_resize_box_3.png"
+                        srcset="/p/go-sse/sse_hub20de7200eadae8c2851bb2c08fb8e41_89131_800x0_resize_box_3.png 800w, /p/go-sse/sse_hub20de7200eadae8c2851bb2c08fb8e41_89131_1600x0_resize_box_3.png 1600w"
+                        width="800" 
+                        height="323" 
+                        loading="lazy"
+                        alt="Featured image of post Go SSE" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8E%A8%E9%80%81/" >
+                推送
+            </a>
+        
+            <a href="/categories/sse/" >
+                SSE
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/go-sse/">Go SSE</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2024-01-24</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <hr>
+<p><code>WebSocket</code> 提供了全双工通道形式，允许服务器和客户端之间进行双向通信。这意味着不但客户端可以向服务端发送消息，同时服务端也可以向服务器发送消息。</p>
+<p><code>WebSocket</code> 通常用于</p>
+<ul>
+<li>实时聊天工具</li>
+<li>实时游戏</li>
+<li>实时协作工具</li>
+<li>&hellip;&hellip;</li>
+</ul>
+<p>但对于很多 web 程序来说，<code>WebSocket</code> 可能过大。比如，客户端需要实时更新会员中心页的通知数量，不需要双向通信。这时，只需要由服务端向客户端发送消息即可，这个技术就是：<code>SSE</code>。</p>
+<hr>
+<h2 id="什么是-sse">什么是 SSE</h2>
+<p><code>SSE(Server-Sent Events)</code>使用的是基于 HTTP 的协议。严格来讲，HTTP 协议是无法做到服务器主动推送消息的。但凡事都有例外，就是服务器向客户端声明发送的是数据流。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Content-Type:text/event-stream
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也就是说，服务端发送的并不是一次性的数据包，而是不间断的数据流。只要有数据，服务端会源源不断的向客户端发送数据，直到客户端关闭连接。</p>
+<p>这种通信是以流的形式来通信，视频播放即是这种形式。</p>
+<p><code>SSE</code> 利用这种机制向浏览器推送消息。目前除了IE浏览器，基本上所有的浏览器都支持。</p>
+<hr>
+<h2 id="与-websocket-的区别">与 WebSocket 的区别</h2>
+<ul>
+<li><code>SSE</code> 提供单向通信，<code>WebSocket</code> 提供双向通信</li>
+<li><code>SSE</code> 基于 HTTP 协议，<code>WebSocket</code> 基于单独的协议（WebSocket 协议）</li>
+<li><code>SSE</code> 只能传输文本，<code>WebSocket</code> 支持二进制和文本传输</li>
+<li><code>SSE</code> 不支持通信加密，<code>WebSocket</code> 支持加密通信（TLS/SSL）</li>
+<li><code>SSE</code> 有最大连接数限制，<code>WebSocket</code> 协议本身吴最大连接数的限制</li>
+<li><code>SSE</code> 支持重连，<code>WebSocket</code> 需要自己实现</li>
+</ul>
+<hr>
+<h2 id="sse-的特点">SSE 的特点</h2>
+<ul>
+<li>通过单个 HTTP 长连接推送消息，无需轮询</li>
+<li>使用轻量级的文本格式（<code>JSON</code>）,减少不必要的资源消耗</li>
+<li>浏览器普遍支持</li>
+<li>实现简单</li>
+</ul>
+<hr>
+<h2 id="数据格式">数据格式</h2>
+<h3 id="请求头">请求头</h3>
+<p>服务端向浏览器发送的 <code>SSE</code> 数据，必须是 <code>UTF-8</code> 编码的文本，必须包含以下 HTTP 请求头：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Content-Type: text/event-stream
+</span></span><span class="line"><span class="cl">Cache-Control: no-cache
+</span></span><span class="line"><span class="cl">Connection: keep-alive
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="消息体">消息体</h3>
+<p><code>SSE</code> 的消息体格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">[field]: [value]\n
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>field 可以是以下四个值：</p>
+<ul>
+<li>id</li>
+<li>event</li>
+<li>data</li>
+<li>retry</li>
+</ul>
+<p><strong>id 字段</strong></p>
+<p>id 相当于每一条数据的编号。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">id: 123124\n
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果发生断连，浏览器会将 id 放到 <code>Last-Event-Id</code> 中进行重连来作为以重简单的同步机制。</p>
+<p><strong>event 字段</strong></p>
+<p>event 表示自定义的事件类型，如果忽略，默认是 <code>message</code> 。浏览器可以用 <code>addEventListener()</code> 来监听该事件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">event: foo\n
+</span></span><span class="line"><span class="cl">data: a foo event\n\n
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">data: a default event\n\n
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以上代码实现了 2 条信息。</p>
+<p>第一条的事件名称是 <code>foo</code>，第二条没有指定事件，触发浏览器的 <code>message</code> 事件。</p>
+<p><strong>data 字段</strong></p>
+<p>消息数据，以文本的形式发送。格式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">data: hello world\n\n
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果以 <code>\n\n</code> 为结尾，表示一条完整的数据消息。</p>
+<p>多行数据可以以 <code>\n</code> 为结尾，如下发送一条 JSON 数据：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">data: {\n
+</span></span><span class="line"><span class="cl">data: &#34;name&#34;: &#34;张三&#34;,\n
+</span></span><span class="line"><span class="cl">data: &#34;age&#34;, 25\n
+</span></span><span class="line"><span class="cl">data: }\n\n
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>retry 字段</strong></p>
+<p>服务端可以用 <code>retry</code> 来指定浏览器重新发起连接的时间间隔。单位毫秒</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">retry: 2000\n
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以上代码表示浏览器间隔 2 秒重新发起连接。</p>
+<p>如果 <code>retry</code> 的值不是整数，则会被忽略。</p>
+<p>浏览器会发起重连的原因：</p>
+<ul>
+<li>时间间隔到期</li>
+<li>网络错误</li>
+</ul>
+<hr>
+<h2 id="sse-实战">SSE 实战</h2>
+<p>接下来我们完成一个简单示例来进一步了解 <code>SSE</code> 的用法。</p>
+<p>用户在刊登楼盘的时候，需要上传跟楼盘相关的图片。</p>
+<p>用户一般是用手机拍摄的图片，如果要求从 PC 浏览器上传，就需要用户从手机端将图片传输到 PC，这就增加了用户的工作量，会让用户感到很不方便。</p>
+<p>于是，我们需要实现一个功能，使用户能够从手机端上传图片，同时 PC 浏览器也能同步显示用户上传的图片。</p>
+<h3 id="具体流程">具体流程</h3>
+<p>1、用户进入刊登页面，显示上传图片二维码</p>
+<p><img src="/p/go-sse/uploadbyqr.png"
+	width="656"
+	height="140"
+	srcset="/p/go-sse/uploadbyqr_hue5caef3814ddbbe0782d032f36cc7710_11148_480x0_resize_box_3.png 480w, /p/go-sse/uploadbyqr_hue5caef3814ddbbe0782d032f36cc7710_11148_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="468"
+		data-flex-basis="1124px"
+	
+></p>
+<p>2、用户用手机照相机扫二维码后，会跳转到手机浏览器</p>
+<p><img src="/p/go-sse/uploadbyqr2.png"
+	width="459"
+	height="462"
+	srcset="/p/go-sse/uploadbyqr2_hua1bc6b88e2d03134e053e032276246d4_19071_480x0_resize_box_3.png 480w, /p/go-sse/uploadbyqr2_hua1bc6b88e2d03134e053e032276246d4_19071_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="99"
+		data-flex-basis="238px"
+	
+></p>
+<p>3、用户在手机浏览器上传图片</p>
+<p><img src="/p/go-sse/mobileuploadbyqr.jpg"
+	width="509"
+	height="390"
+	srcset="/p/go-sse/mobileuploadbyqr_hu844fb1b0b3ae05bddcd6f86af7e19ab1_132999_480x0_resize_q75_box.jpg 480w, /p/go-sse/mobileuploadbyqr_hu844fb1b0b3ae05bddcd6f86af7e19ab1_132999_1024x0_resize_q75_box.jpg 1024w"
+	loading="lazy"
+	
+		alt="image"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="130"
+		data-flex-basis="313px"
+	
+></p>
+<p>4、PC 浏览器端同步显示该图片</p>
+<p><img src="/p/go-sse/mobileuploadbyqr2.png"
+	width="677"
+	height="395"
+	srcset="/p/go-sse/mobileuploadbyqr2_hubcd041f0cf0cefb47d38b84894c9dfe7_72950_480x0_resize_box_3.png 480w, /p/go-sse/mobileuploadbyqr2_hubcd041f0cf0cefb47d38b84894c9dfe7_72950_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="171"
+		data-flex-basis="411px"
+	
+></p>
+<h3 id="服务端实现">服务端实现</h3>
+<p>服务端我们用 Go 语言，kratos 框架实现，。</p>
+<p>定义支持 <code>SSE</code> 的 header 头：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 設置頭部，告訴瀏覽器這是一個 SSE 流
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">w</span><span class="p">.</span><span class="nf">Header</span><span class="p">().</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;Content-Type&#34;</span><span class="p">,</span> <span class="s">&#34;text/event-stream&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">w</span><span class="p">.</span><span class="nf">Header</span><span class="p">().</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;Cache-Control&#34;</span><span class="p">,</span> <span class="s">&#34;no-cache&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">w</span><span class="p">.</span><span class="nf">Header</span><span class="p">().</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;Connection&#34;</span><span class="p">,</span> <span class="s">&#34;keep-alive&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>实例化一个 <code>messageChan</code> 的通道变量。向客户端发送的消息将通过此通道传递。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 建立一個消息通道
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">messageChan</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">string</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>创建一个协程，向 <code>messageChan</code> 通道中发送数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">go</span> <span class="kd">func</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">timeout</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="mi">30</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">defer</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 關閉消息通道
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nb">close</span><span class="p">(</span><span class="nx">messageChan</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">messageChan</span> <span class="p">=</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">images</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">imageUC</span><span class="p">.</span><span class="nf">GetImagesByIdentifier</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">memberID</span><span class="p">,</span> <span class="nx">identifier</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">s</span><span class="p">.</span><span class="nx">logger</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;getImages error: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">images</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">buf</span> <span class="nx">bytes</span><span class="p">.</span><span class="nx">Buffer</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">_</span> <span class="p">=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">NewEncoder</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">buf</span><span class="p">).</span><span class="nf">Encode</span><span class="p">(</span><span class="nx">images</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">select</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nx">messageChan</span> <span class="o">&lt;-</span> <span class="nx">buf</span><span class="p">.</span><span class="nf">String</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="o">&lt;-</span><span class="nx">timeout</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>循环读取通道中的数据，<code>messageChan</code> 持续等待并接收数据。如果消息可用，那么它将写入到 <code>http.ResponseWriter</code> 中，同时刷新消息。</p>
+<p>如果客户端关闭连接，<code>Context().Done()</code> 会给出一个关闭信号，我们就可以退出循环（退出函数）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">flusher</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">w</span><span class="p">.(</span><span class="nx">kratosHttp</span><span class="p">.</span><span class="nx">Flusher</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">select</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nx">message</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="nx">messageChan</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 向客戶端發送事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">event</span> <span class="p">=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;event: %s\n&#34;</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">message</span> <span class="p">=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;data: %s\n&#34;</span><span class="p">,</span> <span class="nx">message</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">retry</span> <span class="o">:=</span> <span class="s">&#34;retry: 2000\n&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">_</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">&#34;%s%s%s\n&#34;</span><span class="p">,</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">retry</span><span class="p">,</span> <span class="nx">message</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">flusher</span><span class="p">.</span><span class="nf">Flush</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="o">&lt;-</span><span class="nx">ctx</span><span class="p">.</span><span class="nf">Request</span><span class="p">().</span><span class="nf">Context</span><span class="p">().</span><span class="nf">Done</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>完整代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// RegisterSSESvcServers register SSE.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">RegisterSSESvcServers</span><span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">kratosHttp</span><span class="p">.</span><span class="nx">Server</span><span class="p">,</span> <span class="nx">srv</span> <span class="o">*</span><span class="nx">SSEService</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">s</span><span class="p">.</span><span class="nf">Route</span><span class="p">(</span><span class="s">&#34;/v1&#34;</span><span class="p">).</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/api/sse/events&#34;</span><span class="p">,</span> <span class="nx">srv</span><span class="p">.</span><span class="nx">events</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">SSEService</span><span class="p">)</span> <span class="nf">events</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">kratosHttp</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">r</span> <span class="o">:=</span> <span class="nx">ctx</span><span class="p">.</span><span class="nf">Request</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">w</span> <span class="o">:=</span> <span class="nx">ctx</span><span class="p">.</span><span class="nf">Response</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">memberID</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">strconv</span><span class="p">.</span><span class="nf">ParseUint</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nf">Query</span><span class="p">().</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;member_id&#34;</span><span class="p">),</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">_</span> <span class="p">=</span> <span class="nf">JsonRes</span><span class="p">(</span><span class="nx">constant</span><span class="p">.</span><span class="nx">StatusParamError</span><span class="p">,</span> <span class="s">&#34;請傳遞member_id&#34;</span><span class="p">)(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">identifier</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nf">Query</span><span class="p">().</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;identifier&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">identifier</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">_</span> <span class="p">=</span> <span class="nf">JsonRes</span><span class="p">(</span><span class="nx">constant</span><span class="p">.</span><span class="nx">StatusParamError</span><span class="p">,</span> <span class="s">&#34;請傳遞identifier&#34;</span><span class="p">)(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">event</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nf">Query</span><span class="p">().</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;event&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">event</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">_</span> <span class="p">=</span> <span class="nf">JsonRes</span><span class="p">(</span><span class="nx">constant</span><span class="p">.</span><span class="nx">StatusParamError</span><span class="p">,</span> <span class="s">&#34;請傳遞event&#34;</span><span class="p">)(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 建立一個消息通道
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">messageChan</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">string</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">go</span> <span class="nx">s</span><span class="p">.</span><span class="nf">getMessage</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">messageChan</span><span class="p">,</span> <span class="nb">uint32</span><span class="p">(</span><span class="nx">memberID</span><span class="p">),</span> <span class="nx">identifier</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 設置頭部，告訴瀏覽器這是一個 SSE 流
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">w</span><span class="p">.</span><span class="nf">Header</span><span class="p">().</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;Content-Type&#34;</span><span class="p">,</span> <span class="s">&#34;text/event-stream&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">w</span><span class="p">.</span><span class="nf">Header</span><span class="p">().</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;Cache-Control&#34;</span><span class="p">,</span> <span class="s">&#34;no-cache&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">w</span><span class="p">.</span><span class="nf">Header</span><span class="p">().</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;Connection&#34;</span><span class="p">,</span> <span class="s">&#34;keep-alive&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 準備 flusher
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">flusher</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">w</span><span class="p">.(</span><span class="nx">kratosHttp</span><span class="p">.</span><span class="nx">Flusher</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">select</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nx">message</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="nx">messageChan</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 向客戶端發送事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">event</span> <span class="p">=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;event: %s\n&#34;</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">message</span> <span class="p">=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;data: %s\n&#34;</span><span class="p">,</span> <span class="nx">message</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">retry</span> <span class="o">:=</span> <span class="s">&#34;retry: 2000\n&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">_</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">&#34;%s%s%s\n&#34;</span><span class="p">,</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">retry</span><span class="p">,</span> <span class="nx">message</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">flusher</span><span class="p">.</span><span class="nf">Flush</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="o">&lt;-</span><span class="nx">ctx</span><span class="p">.</span><span class="nf">Request</span><span class="p">().</span><span class="nf">Context</span><span class="p">().</span><span class="nf">Done</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">SSEService</span><span class="p">)</span> <span class="nf">getMessage</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">ctx</span> <span class="nx">kratosHttp</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">messageChan</span> <span class="kd">chan</span><span class="o">&lt;-</span> <span class="kt">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">memberID</span> <span class="kt">uint32</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">identifier</span> <span class="kt">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">timeout</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="mi">30</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">defer</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 關閉消息通道
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nb">close</span><span class="p">(</span><span class="nx">messageChan</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">messageChan</span> <span class="p">=</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">images</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">imageUC</span><span class="p">.</span><span class="nf">GetImagesByIdentifier</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">memberID</span><span class="p">,</span> <span class="nx">identifier</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">s</span><span class="p">.</span><span class="nx">logger</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;getImages error: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">images</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">buf</span> <span class="nx">bytes</span><span class="p">.</span><span class="nx">Buffer</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">_</span> <span class="p">=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">NewEncoder</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">buf</span><span class="p">).</span><span class="nf">Encode</span><span class="p">(</span><span class="nx">images</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">        <span class="k">select</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nx">messageChan</span> <span class="o">&lt;-</span> <span class="nx">buf</span><span class="p">.</span><span class="nf">String</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="o">&lt;-</span><span class="nx">timeout</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="js-实现">js 实现</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>SSE test<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&#34;DOMContentLoaded&#34;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">var</span> <span class="nx">evsrc</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventSource</span><span class="p">(</span><span class="s2">&#34;http://go.dev.591.com.hk:8084/v1/api/sse/events?event=upload_by_qr&amp;member_id=1&amp;identifier=efabcoxe&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">evsrc</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&#34;upload_by_qr&#34;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Received upload_by_qr event: &#34;</span> <span class="o">+</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;log&#34;</span><span class="p">).</span><span class="nx">insertAdjacentHTML</span><span class="p">(</span><span class="s2">&#34;beforeend&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;li&gt;&#34;</span> <span class="o">+</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">data</span> <span class="o">+</span> <span class="s2">&#34;&lt;/li&gt;&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="nx">evsrc</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;readyState = &#34;</span> <span class="o">+</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">.</span><span class="nx">readyState</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>SSE test<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;log&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="sse-测试">SSE 测试</h3>
+<p>1、启动服务</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">INFO <span class="nv">ts</span><span class="o">=</span>2024-01-23T14:18:47+08:00 <span class="nv">caller</span><span class="o">=</span>http/server.go:317 service.id<span class="o">=</span>addcn-taiwan.meta.juicefs.io service.name<span class="o">=</span>house_release service.version<span class="o">=</span> trace.id<span class="o">=</span> span.id<span class="o">=</span> <span class="nv">msg</span><span class="o">=[</span>HTTP<span class="o">]</span> server listening on: <span class="o">[</span>::<span class="o">]</span>:8084
+</span></span><span class="line"><span class="cl">INFO <span class="nv">ts</span><span class="o">=</span>2024-01-23T14:18:47+08:00 <span class="nv">caller</span><span class="o">=</span>grpc/server.go:212 service.id<span class="o">=</span>addcn-taiwan.meta.juicefs.io service.name<span class="o">=</span>house_release service.version<span class="o">=</span> trace.id<span class="o">=</span> span.id<span class="o">=</span> <span class="nv">msg</span><span class="o">=[</span>gRPC<span class="o">]</span> server listening on: <span class="o">[</span>::<span class="o">]</span>:9094
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2、访问 html 页面</p>
+<p><img src="/p/go-sse/uploadbyqrsync.png"
+	width="904"
+	height="590"
+	srcset="/p/go-sse/uploadbyqrsync_hu1385307fc3881e9a2fd39c6e7562681b_40664_480x0_resize_box_3.png 480w, /p/go-sse/uploadbyqrsync_hu1385307fc3881e9a2fd39c6e7562681b_40664_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="153"
+		data-flex-basis="367px"
+	
+></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/sse/">SSE</a>
+        
+            <a href="/tags/server-sent-events/">server-sent-events</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="stridedot/stridedot.github.io"
+    data-repo-id="R_kgDOHUrReg"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOHUrRes4CbivC"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2023 - 
+        
+        2024 StrideDot
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.21.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

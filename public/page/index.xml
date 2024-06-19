@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Pages on StrideDot</title>
+        <link>https://stridedot.github.io/page/</link>
+        <description>Recent content in Pages on StrideDot</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>StrideDot</copyright>
+        <lastBuildDate>Tue, 05 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://stridedot.github.io/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>归档</title>
+        <link>https://stridedot.github.io/archives/</link>
+        <pubDate>Tue, 05 Dec 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://stridedot.github.io/archives/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>关于</title>
+        <link>https://stridedot.github.io/%E5%85%B3%E4%BA%8E/</link>
+        <pubDate>Wed, 21 Sep 2022 17:50:46 +0800</pubDate>
+        
+        <guid>https://stridedot.github.io/%E5%85%B3%E4%BA%8E/</guid>
+        <description>&lt;h1 id=&#34;自我介绍&#34;&gt;自我介绍&lt;/h1&gt;
+&lt;p&gt;我叫赵志强（StrideDot），目前任职于 &lt;strong&gt;数睿（深圳）科技有限公司&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在深圳工作了 8 年（截止到 2023），PHP 和 Go。&lt;/p&gt;
+&lt;p&gt;虽然做了这么久，但仍然觉得自己是个菜鸟，还有很多东西需要学习。&lt;/p&gt;
+&lt;p&gt;最近在做微服务项目，一直希冀在&lt;strong&gt;区块链&lt;/strong&gt;这方面有所建树。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;开源项目&#34;&gt;开源项目&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://stridedot.github.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;个人博客&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/hanpaopao66/kaspa_chinese_web_go&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;kaspa_web&lt;/a&gt;：Kaspa区块链中文网站&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/stridedot/go-standard-library-examples&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;go-standard-library&lt;/a&gt;：个人Go标准库示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;工作技能&#34;&gt;工作技能&lt;/h1&gt;
+&lt;p&gt;后端语言&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PHP&lt;/li&gt;
+&lt;li&gt;Go&lt;/li&gt;
+&lt;li&gt;Python&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;搜索引擎&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Elasticsearch&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;数据库&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MySQL&lt;/li&gt;
+&lt;li&gt;Clickhouse&lt;/li&gt;
+&lt;li&gt;Redis&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;微服务&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;gRPC&lt;/li&gt;
+&lt;li&gt;Consul&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;仓库&#34;&gt;仓库&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://gitee.com/snitso&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;gitee&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/stridedot&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;github&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;项目经验&#34;&gt;项目经验&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;研发流程总结&lt;/em&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;提出问题
+&lt;ol&gt;
+&lt;li&gt;提前准备：仔细阅读需求文档。&lt;/li&gt;
+&lt;li&gt;具体而明确，关注具体的细节和需求。&lt;/li&gt;
+&lt;li&gt;针对关键点。&lt;/li&gt;
+&lt;li&gt;多角度思考。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;与需求方充分沟通：了解他们的期望、需求和目标。
+&lt;ol&gt;
+&lt;li&gt;提出问题&lt;/li&gt;
+&lt;li&gt;倾听和记录&lt;/li&gt;
+&lt;li&gt;澄清和确认&lt;/li&gt;
+&lt;li&gt;持续沟通&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;使用用户故事
+&lt;ol&gt;
+&lt;li&gt;用户故事结构：用户的角色、目标和期望。&lt;/li&gt;
+&lt;li&gt;用户视角。&lt;/li&gt;
+&lt;li&gt;简洁明了，一句话描述用户需求。&lt;/li&gt;
+&lt;li&gt;可测试性。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;使用原型和演示&lt;/li&gt;
+&lt;li&gt;分析和验证：分析文档，确保可衡量、可验证&lt;/li&gt;
+&lt;li&gt;持续沟通和反馈&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;格言&#34;&gt;格言&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;There are only two things you need to be a great programmer: &lt;strong&gt;curiosity&lt;/strong&gt; and &lt;strong&gt;kindness&lt;/strong&gt;. Everything else you can learn over time. Everything.&lt;/li&gt;
+&lt;li&gt;健康、热情、努力、执着、心胸开阔&lt;/li&gt;
+&lt;li&gt;用心把每件小事做到最好&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>搜索</title>
+        <link>https://stridedot.github.io/search/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://stridedot.github.io/search/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>友链</title>
+        <link>https://stridedot.github.io/%E5%8F%8B%E9%93%BE/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://stridedot.github.io/%E5%8F%8B%E9%93%BE/</guid>
+        <description>&lt;p&gt;暂无&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
